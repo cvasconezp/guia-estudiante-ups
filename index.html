@@ -233,7 +233,7 @@
   </div>
   <div class="nav-section">
     <div class="nav-section-title">Cuenta y Seguridad</div>
-    <a class="nav-item" data-section="contraseña" onclick="showSection('contraseña')">
+    <a class="nav-item" data-section="contrasena" onclick="showSection('contrasena')">
       <span class="nav-icon">&#128272;</span> Recuperar Contraseña
     </a>
     <a class="nav-item" data-section="correo" onclick="showSection('correo')">
@@ -292,7 +292,7 @@
           <h3>Ver Calificaciones</h3>
           <p>Consulta tus notas por asignatura</p>
         </div>
-        <div class="home-card" onclick="showSection('contraseña')">
+        <div class="home-card" onclick="showSection('contrasena')">
           <div class="card-icon">&#128272;</div>
           <h3>Recuperar Contraseña</h3>
           <p>Restablece tu clave de acceso</p>
@@ -400,7 +400,7 @@
     </div>
 
     <!-- RECUPERAR CONTRASENA -->
-    <div class="section" id="sec-contraseña">
+    <div class="section" id="sec-contrasena">
       <h2 class="section-title">Pasos para recuperar tu contraseña</h2>
       <p class="section-desc">Si olvidaste tu contraseña del portal UPS, sigue estos pasos para restablecerla. La nueva contraseña debe contener mayúsculas, minúsculas y números.</p>
       <div class="step-card">
@@ -669,10 +669,10 @@ function showSection(id) {
   document.querySelector('[data-section="' + id + '"]').classList.add('active');
   const titles = {
     home: 'Inicio', avac: 'Acceso al AVAC', calificaciones: 'Calificaciones',
-    contraseña: 'Recuperar Contraseña', deudas: 'Deudas Pendientes',
-    evaluacion: 'Evaluación Docente', record: 'Récord Académico',
-    practica: 'Solicitud de Práctica', adicion: 'Adición de Créditos',
-    correo: 'Escribir un Correo', '2fa': 'Activar 2FA', canales: 'Canales de Comunicación'
+    contrasena: 'Recuperar Contrase\u00f1a', deudas: 'Deudas Pendientes',
+    evaluacion: 'Evaluaci\u00f3n Docente', record: 'R\u00e9cord Acad\u00e9mico',
+    practica: 'Solicitud de Pr\u00e1ctica', adicion: 'Adici\u00f3n de Cr\u00e9ditos',
+    correo: 'Escribir un Correo', '2fa': 'Activar 2FA', canales: 'Canales de Comunicaci\u00f3n'
   };
   document.getElementById('breadcrumb').textContent = titles[id] || id;
   // Close sidebar on mobile
@@ -691,4 +691,4 @@ function openLightbox(img) {
 function closeLightbox() {
   document.getElementById('lightbox').classList.remove('open');
 }
-document.addEventListener('keydown
+documen
