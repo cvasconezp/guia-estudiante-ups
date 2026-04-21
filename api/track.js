@@ -1,5 +1,6 @@
 // Vercel Serverless Function - Track page visits
 // Uses Upstash Redis REST API
+// Timezone: America/Guayaquil (Ecuador, UTC-5)
 
 const UPSTASH_URL = process.env.UPSTASH_REDIS_REST_URL;
 const UPSTASH_TOKEN = process.env.UPSTASH_REDIS_REST_TOKEN;
@@ -16,8 +17,46 @@ async function redis(command) {
   return res.json();
 }
 
+function getEcuadorTime() {
+  // Ecuador is UTC-5 (no DST)
+  const now = new Date();
+  const utc = now.getTime() + now.getTimezoneOffset() * 60000;
+  const ec = new Date(utc - 5 * 3600000);
+  return ec;
+}
+
+function detectDevice(ua) {
+  if (!ua) return 'desktop';
+  ua = ua.toLowerCase();
+  if (/ipad|tablet|playbook|silk/.test(ua)) return 'tablet';
+  if (/android/.test(ua) && !/mobile/.test(ua)) return 'tablet';
+  if (/mobile|iphone|ipod|android.*mobile|blackberry|iemobile|opera mini|opera mobi|windows phone/.test(ua)) return 'mobile';
+  return 'desktop';
+}
+
+function detectBrowser(ua) {
+  if (!ua) return 'otro';
+  ua = ua.toLowerCase();
+  if (/edg\//.test(ua)) return 'edge';
+  if (/opr\/|opera/.test(ua)) return 'opera';
+  if (/chrome|crios/.test(ua)) return 'chrome';
+  if (/firefox|fxios/.test(ua)) return 'firefox';
+  if (/safari/.test(ua) && !/chrome/.test(ua)) return 'safari';
+  return 'otro';
+}
+
+function detectOS(ua) {
+  if (!ua) return 'otro';
+  ua = ua.toLowerCase();
+  if (/windows/.test(ua)) return 'windows';
+  if (/macintosh|mac os/.test(ua)) return 'macos';
+  if (/android/.test(ua)) return 'android';
+  if (/iphone|ipad|ipod/.test(ua)) return 'ios';
+  if (/linux/.test(ua)) return 'linux';
+  return 'otro';
+}
+
 export default async function handler(req, res) {
-  // CORS
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
@@ -26,17 +65,22 @@ export default async function handler(req, res) {
 
   try {
     const { section, referrer } = req.body || {};
-    const now = new Date();
-    const dateKey = now.toISOString().split('T')[0]; // YYYY-MM-DD
-    const hourKey = now.getHours();
+    const ec = getEcuadorTime();
+    const dateKey = ec.toISOString().split('T')[0]; // YYYY-MM-DD in Ecuador time
+    const hourKey = ec.getHours(); // Hour in Ecuador time
+
+    const ua = req.headers['user-agent'] || '';
+    const device = detectDevice(ua);
+    const browser = detectBrowser(ua);
+    const os = detectOS(ua);
 
     // Increment total page views
     await redis(["INCR", "stats:total_views"]);
 
-    // Increment daily views
+    // Increment daily views (Ecuador timezone)
     await redis(["INCR", `stats:daily:${dateKey}`]);
 
-    // Increment hourly views for today
+    // Increment hourly views (Ecuador timezone)
     await redis(["INCR", `stats:hourly:${dateKey}:${hourKey}`]);
 
     // Increment section views
@@ -45,7 +89,7 @@ export default async function handler(req, res) {
       await redis(["INCR", `stats:section_daily:${dateKey}:${section}`]);
     }
 
-    // Track unique visitors by date (approximate via IP hash)
+    // Track unique visitors by date
     const ip = req.headers['x-forwarded-for'] || req.headers['x-real-ip'] || 'unknown';
     const visitorHash = Buffer.from(ip).toString('base64').substring(0, 12);
     await redis(["SADD", `stats:visitors:${dateKey}`, visitorHash]);
@@ -55,13 +99,20 @@ export default async function handler(req, res) {
       await redis(["INCR", `stats:referrer:${referrer}`]);
     }
 
-    // Keep track of active dates (last 90 days)
+    // Track device, browser, OS
+    await redis(["INCR", `stats:device:${device}`]);
+    await redis(["INCR", `stats:device_daily:${dateKey}:${device}`]);
+    await redis(["INCR", `stats:browser:${browser}`]);
+    await redis(["INCR", `stats:os:${os}`]);
+
+    // Keep track of active dates
     await redis(["SADD", "stats:dates", dateKey]);
 
     // Set TTL on daily keys (90 days)
     await redis(["EXPIRE", `stats:daily:${dateKey}`, 7776000]);
     await redis(["EXPIRE", `stats:visitors:${dateKey}`, 7776000]);
     await redis(["EXPIRE", `stats:hourly:${dateKey}:${hourKey}`, 7776000]);
+    await redis(["EXPIRE", `stats:device_daily:${dateKey}:${device}`, 7776000]);
 
     return res.status(200).json({ ok: true });
   } catch (e) {

@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Admin - Gu\u00eda del Estudiante UPS</title>
+<title>Admin - Guía del Estudiante UPS</title>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -197,6 +197,16 @@
   .rank-3 { background:linear-gradient(135deg, #fdba74, #f97316); color:#7c2d12; }
   .rank-other { background:#f3f4f6; color:var(--text-muted); }
 
+  /* DEVICE ROW */
+  .charts-row-3 { display:grid; grid-template-columns:repeat(3,1fr); gap:16px; margin-bottom:16px; }
+  @media(max-width:900px) { .charts-row-3 { grid-template-columns:1fr; } }
+  .device-stat { display:flex; align-items:center; gap:12px; padding:10px 0; border-bottom:1px solid #f3f4f6; }
+  .device-stat:last-child { border-bottom:none; }
+  .device-icon { font-size:20px; width:36px; height:36px; border-radius:10px; display:flex; align-items:center; justify-content:center; background:rgba(0,51,102,0.06); }
+  .device-name { font-weight:500; font-size:14px; flex:1; }
+  .device-count { font-weight:700; color:var(--ups-blue); font-size:14px; font-variant-numeric:tabular-nums; }
+  .device-pct { font-size:12px; color:var(--text-muted); margin-left:4px; }
+
   /* FOOTER */
   .footer { text-align:center; padding:20px 32px; color:var(--text-muted); font-size:12px; }
   .footer a { color:var(--ups-blue); text-decoration:none; }
@@ -219,6 +229,14 @@
     .header h1 { font-size:15px; }
   }
   @media(max-width:600px) {
+    .login-box { padding:32px 24px; width:95vw; }
+    .login-box h1 { font-size:20px; }
+    .header-actions { gap:4px; }
+    .btn-header { padding:6px 10px; font-size:12px; }
+    .chart-container { height:250px; }
+    .chart-card { padding:16px; }
+    .table-card { padding:16px; overflow-x:auto; }
+    td, th { padding:8px 8px; font-size:13px; }
     .kpi-grid { grid-template-columns:1fr; }
     .header-subtitle { display:none; }
   }
@@ -331,16 +349,45 @@
     </div>
   </div>
 
+  <!-- CHARTS ROW 3: Devices, Browsers, OS -->
+  <div class="charts-row-3" id="deviceGrid" style="display:none;">
+    <div class="chart-card animate-in animate-delay-2">
+      <div class="chart-header">
+        <h3>Dispositivos</h3>
+        <span class="chart-badge">Acumulado</span>
+      </div>
+      <div class="chart-container"><canvas id="deviceChart"></canvas></div>
+    </div>
+    <div class="chart-card animate-in animate-delay-3">
+      <div class="chart-header">
+        <h3>Navegadores</h3>
+        <span class="chart-badge">Acumulado</span>
+      </div>
+      <div class="chart-container"><canvas id="browserChart"></canvas></div>
+    </div>
+    <div class="chart-card animate-in animate-delay-4">
+      <div class="chart-header">
+        <h3>Sistema Operativo</h3>
+        <span class="chart-badge">Acumulado</span>
+      </div>
+      <div class="chart-container"><canvas id="osChart"></canvas></div>
+    </div>
+  </div>
+
   <div class="footer" id="timestamp">
     <a href="/">&#8592; Volver a la Gu&iacute;a del Estudiante</a>
   </div>
 </div>
 
 <script>
+
 var adminToken = '';
 var dailyChartInstance = null;
 var hourlyChartInstance = null;
 var sectionChartInstance = null;
+var deviceChartInstance = null;
+var browserChartInstance = null;
+var osChartInstance = null;
 
 var sectionNames = {
   home:'Inicio', avac:'Acceso al AVAC', calificaciones:'Calificaciones',
@@ -383,6 +430,7 @@ function loadStats() {
   document.getElementById('kpiGrid').style.display = 'none';
   document.getElementById('chartsGrid').style.display = 'none';
   document.getElementById('tableGrid').style.display = 'none';
+  document.getElementById('deviceGrid').style.display = 'none';
 
   fetch('/api/stats', { headers: { Authorization: 'Bearer ' + adminToken } })
     .then(function(r) { return r.json(); })
@@ -395,6 +443,7 @@ function renderDashboard(data) {
   document.getElementById('kpiGrid').style.display = 'grid';
   document.getElementById('chartsGrid').style.display = 'grid';
   document.getElementById('tableGrid').style.display = 'grid';
+  document.getElementById('deviceGrid').style.display = 'grid';
 
   // KPIs
   document.getElementById('totalViews').textContent = data.totalViews.toLocaleString();
@@ -533,8 +582,84 @@ function renderDashboard(data) {
     }
   });
 
+  // --- DEVICE CHART ---
+  var deviceLabels = {desktop:'Escritorio', mobile:'M\u00f3vil', tablet:'Tablet'};
+  var deviceColors2 = ['#003366','#d4a017','#10b981'];
+  var deviceEntries = Object.entries(data.deviceStats || {}).filter(function(e){return e[1]>0;});
+  if (deviceEntries.length === 0) deviceEntries = [['desktop',0]];
+  var deviceTotal = deviceEntries.reduce(function(s,e){return s+e[1];},0);
+
+  if (deviceChartInstance) deviceChartInstance.destroy();
+  deviceChartInstance = new Chart(document.getElementById('deviceChart').getContext('2d'), {
+    type: 'doughnut',
+    data: {
+      labels: deviceEntries.map(function(e){return deviceLabels[e[0]]||e[0];}),
+      datasets: [{ data: deviceEntries.map(function(e){return e[1];}),
+        backgroundColor: deviceColors2.slice(0,deviceEntries.length), borderWidth:2, borderColor:'#fff', hoverOffset:8 }]
+    },
+    options: {
+      responsive:true, maintainAspectRatio:false, cutout:'55%',
+      plugins:{
+        legend:{position:'bottom',labels:{font:{size:12,family:'Inter'},usePointStyle:true,padding:14,boxWidth:8}},
+        tooltip:{backgroundColor:'#1a1a2e',padding:10,cornerRadius:8,
+          callbacks:{label:function(ctx){var p=deviceTotal>0?((ctx.raw/deviceTotal)*100).toFixed(1):'0';return ' '+ctx.label+': '+ctx.raw+' ('+p+'%)';}}}
+      }
+    }
+  });
+
+  // --- BROWSER CHART ---
+  var browserLabels2 = {chrome:'Chrome',firefox:'Firefox',safari:'Safari',edge:'Edge',opera:'Opera',otro:'Otro'};
+  var browserColors2 = ['#4285F4','#FF7139','#006CFF','#0078D7','#FF1B2D','#9ca3af'];
+  var browserEntries = Object.entries(data.browserStats || {}).filter(function(e){return e[1]>0;});
+  if (browserEntries.length === 0) browserEntries = [['chrome',0]];
+  var browserTotal = browserEntries.reduce(function(s,e){return s+e[1];},0);
+
+  if (browserChartInstance) browserChartInstance.destroy();
+  browserChartInstance = new Chart(document.getElementById('browserChart').getContext('2d'), {
+    type: 'doughnut',
+    data: {
+      labels: browserEntries.map(function(e){return browserLabels2[e[0]]||e[0];}),
+      datasets: [{ data: browserEntries.map(function(e){return e[1];}),
+        backgroundColor: browserColors2.slice(0,browserEntries.length), borderWidth:2, borderColor:'#fff', hoverOffset:8 }]
+    },
+    options: {
+      responsive:true, maintainAspectRatio:false, cutout:'55%',
+      plugins:{
+        legend:{position:'bottom',labels:{font:{size:12,family:'Inter'},usePointStyle:true,padding:14,boxWidth:8}},
+        tooltip:{backgroundColor:'#1a1a2e',padding:10,cornerRadius:8,
+          callbacks:{label:function(ctx){var p=browserTotal>0?((ctx.raw/browserTotal)*100).toFixed(1):'0';return ' '+ctx.label+': '+ctx.raw+' ('+p+'%)';}}}
+      }
+    }
+  });
+
+  // --- OS CHART ---
+  var osLabels2 = {windows:'Windows',macos:'macOS',android:'Android',ios:'iOS',linux:'Linux',otro:'Otro'};
+  var osColors2 = ['#0078D7','#555555','#3DDC84','#A2AAAD','#FCC624','#9ca3af'];
+  var osEntries = Object.entries(data.osStats || {}).filter(function(e){return e[1]>0;});
+  if (osEntries.length === 0) osEntries = [['windows',0]];
+  var osTotal = osEntries.reduce(function(s,e){return s+e[1];},0);
+
+  if (osChartInstance) osChartInstance.destroy();
+  osChartInstance = new Chart(document.getElementById('osChart').getContext('2d'), {
+    type: 'doughnut',
+    data: {
+      labels: osEntries.map(function(e){return osLabels2[e[0]]||e[0];}),
+      datasets: [{ data: osEntries.map(function(e){return e[1];}),
+        backgroundColor: osColors2.slice(0,osEntries.length), borderWidth:2, borderColor:'#fff', hoverOffset:8 }]
+    },
+    options: {
+      responsive:true, maintainAspectRatio:false, cutout:'55%',
+      plugins:{
+        legend:{position:'bottom',labels:{font:{size:12,family:'Inter'},usePointStyle:true,padding:14,boxWidth:8}},
+        tooltip:{backgroundColor:'#1a1a2e',padding:10,cornerRadius:8,
+          callbacks:{label:function(ctx){var p=osTotal>0?((ctx.raw/osTotal)*100).toFixed(1):'0';return ' '+ctx.label+': '+ctx.raw+' ('+p+'%)';}}}
+      }
+    }
+  });
+
+  // Timestamp
   document.getElementById('timestamp').innerHTML =
-    '<div style="margin-bottom:8px;">\u00daltima actualizaci\u00f3n: ' + new Date(data.generatedAt).toLocaleString('es-EC') + '</div>' +
+    '<div style="margin-bottom:8px;">\u00daltima actualizaci\u00f3n (hora Ecuador): ' + new Date(data.generatedAt).toLocaleString('es-EC', {timeZone:'America/Guayaquil'}) + '</div>' +
     '<a href="/">\u2190 Volver a la Gu\u00eda del Estudiante</a>';
 }
 </script>
