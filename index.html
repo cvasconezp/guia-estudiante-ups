@@ -705,6 +705,7 @@ function showSection(id) {
   document.getElementById('sidebar').classList.remove('open');
   document.getElementById('overlay').classList.remove('open');
   window.scrollTo(0, 0);
+  trackEvent(id, 'navigate');
 }
 function toggleSidebar() {
   document.getElementById('sidebar').classList.toggle('open');
@@ -718,6 +719,34 @@ function closeLightbox() {
   document.getElementById('lightbox').classList.remove('open');
 }
 document.addEventListener('keydown', function(e) { if(e.key==='Escape') closeLightbox(); });
+
+// --- Analytics Tracking ---
+function trackEvent(section, action) {
+  try {
+    var data = JSON.stringify({
+      section: section || 'home',
+      action: action || 'view',
+      referrer: document.referrer || '',
+      url: window.location.href,
+      timestamp: new Date().toISOString()
+    });
+    if (navigator.sendBeacon) {
+      navigator.sendBeacon('/api/track', data);
+    } else {
+      var xhr = new XMLHttpRequest();
+      xhr.open('POST', '/api/track', true);
+      xhr.setRequestHeader('Content-Type', 'application/json');
+      xhr.send(data);
+    }
+  } catch(e) {
+    // Silent fail - tracking should never break the app
+  }
+}
+
+// Track initial page load
+document.addEventListener('DOMContentLoaded', function() {
+  trackEvent('home', 'pageload');
+});
 </script>
 </body>
 </html>
