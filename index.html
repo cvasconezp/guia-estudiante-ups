@@ -691,4 +691,7 @@ function openLightbox(img) {
 function closeLightbox() {
   document.getElementById('lightbox').classList.remove('open');
 }
-documen
+document.addEventListener('keydown', e => { if(e.key==='Escape') closeLightbox(); });
+</script>
+</body>
+</html>
