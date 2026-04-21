@@ -1,0 +1,695 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Guía del Estudiante - UPS EIB</title>
+<style>
+  :root {
+    --ups-blue: #003366;
+    --ups-blue-light: #1a5276;
+    --ups-gold: #d4a017;
+    --ups-gold-light: #f0c040;
+    --bg-light: #f5f7fa;
+    --text-dark: #2c3e50;
+    --text-medium: #555;
+    --card-shadow: 0 2px 12px rgba(0,0,0,0.08);
+    --sidebar-width: 280px;
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; color: var(--text-dark); background: var(--bg-light); }
+
+  /* SIDEBAR */
+  .sidebar {
+    position: fixed; top:0; left:0; width: var(--sidebar-width); height:100vh;
+    background: linear-gradient(180deg, var(--ups-blue) 0%, var(--ups-blue-light) 100%);
+    color: #fff; overflow-y: auto; z-index: 100; transition: transform .3s;
+  }
+  .sidebar-header {
+    padding: 24px 20px 16px; text-align: center;
+    border-bottom: 2px solid var(--ups-gold);
+  }
+  .sidebar-header h2 { font-size: 15px; font-weight: 600; letter-spacing: .5px; margin-bottom: 4px; color: var(--ups-gold-light); }
+  .sidebar-header h3 { font-size: 12px; font-weight: 400; opacity: .8; }
+  .sidebar-logo { font-size: 22px; font-weight: 700; margin-bottom: 6px; letter-spacing: 1px; }
+
+  .nav-section { padding: 12px 0; }
+  .nav-section-title {
+    font-size: 10px; text-transform: uppercase; letter-spacing: 1.5px;
+    color: var(--ups-gold); padding: 8px 20px; font-weight: 700;
+  }
+  .nav-item {
+    display: flex; align-items: center; gap: 10px;
+    padding: 10px 20px; cursor: pointer; transition: all .2s;
+    font-size: 13.5px; text-decoration: none; color: rgba(255,255,255,.85);
+    border-left: 3px solid transparent;
+  }
+  .nav-item:hover { background: rgba(255,255,255,.1); color: #fff; }
+  .nav-item.active { background: rgba(255,255,255,.15); color: var(--ups-gold-light); border-left-color: var(--ups-gold); }
+  .nav-icon { font-size: 18px; width: 24px; text-align: center; }
+
+  /* MAIN */
+  .main { margin-left: var(--sidebar-width); min-height: 100vh; }
+  .top-bar {
+    background: #fff; padding: 16px 32px; border-bottom: 1px solid #e0e0e0;
+    display: flex; align-items: center; justify-content: space-between;
+    position: sticky; top:0; z-index: 50;
+  }
+  .top-bar h1 { font-size: 18px; color: var(--ups-blue); }
+  .top-bar .breadcrumb { font-size: 12px; color: #999; }
+  .hamburger { display: none; font-size: 24px; cursor: pointer; background: none; border: none; color: var(--ups-blue); }
+
+  .content { padding: 32px; max-width: 900px; }
+
+  /* HERO */
+  .hero {
+    background: linear-gradient(135deg, var(--ups-blue), var(--ups-blue-light));
+    color: #fff; padding: 48px 40px; border-radius: 16px; margin-bottom: 32px;
+    position: relative; overflow: hidden;
+  }
+  .hero::after {
+    content: ''; position: absolute; top: -40px; right: -40px;
+    width: 200px; height: 200px; border-radius: 50%;
+    background: rgba(212,160,23,.15);
+  }
+  .hero h1 { font-size: 28px; margin-bottom: 12px; position: relative; z-index: 1; }
+  .hero p { font-size: 15px; opacity: .9; line-height: 1.6; position: relative; z-index: 1; }
+
+  /* SECTION */
+  .section { display: none; }
+  .section.active { display: block; }
+  .section-title { font-size: 24px; color: var(--ups-blue); margin-bottom: 8px; }
+  .section-desc { color: var(--text-medium); margin-bottom: 28px; font-size: 14.5px; line-height: 1.5; }
+
+  /* STEP CARD */
+  .step-card {
+    background: #fff; border-radius: 12px; padding: 24px; margin-bottom: 20px;
+    box-shadow: var(--card-shadow); border-left: 4px solid var(--ups-gold);
+    transition: transform .2s;
+  }
+  .step-card:hover { transform: translateY(-2px); box-shadow: 0 4px 20px rgba(0,0,0,.1); }
+  .step-header { display: flex; align-items: center; gap: 14px; margin-bottom: 12px; }
+  .step-number {
+    width: 36px; height: 36px; border-radius: 50%;
+    background: linear-gradient(135deg, var(--ups-blue), var(--ups-blue-light));
+    color: #fff; display: flex; align-items: center; justify-content: center;
+    font-weight: 700; font-size: 15px; flex-shrink: 0;
+  }
+  .step-title { font-size: 16px; font-weight: 600; color: var(--ups-blue); }
+  .step-text { color: var(--text-medium); font-size: 14px; line-height: 1.6; margin-bottom: 14px; }
+  .step-img-container { text-align: center; }
+  .step-img {
+    max-width: 100%; max-height: 400px; border-radius: 8px;
+    border: 1px solid #e8e8e8; cursor: pointer; transition: transform .2s;
+  }
+  .step-img:hover { transform: scale(1.02); }
+
+  /* INFO CARD */
+  .info-card {
+    background: #fff; border-radius: 12px; padding: 28px; margin-bottom: 20px;
+    box-shadow: var(--card-shadow);
+  }
+  .info-card h3 { color: var(--ups-blue); margin-bottom: 12px; font-size: 17px; }
+  .info-card p, .info-card li { color: var(--text-medium); font-size: 14px; line-height: 1.7; }
+
+  .contact-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 16px; margin-top: 16px;
+  }
+  .contact-card {
+    background: var(--bg-light); border-radius: 10px; padding: 18px; text-align: center;
+    border: 1px solid #e0e0e0;
+  }
+  .contact-card h4 { color: var(--ups-blue); font-size: 14px; margin-bottom: 6px; }
+  .contact-card p { font-size: 13px; color: var(--text-medium); margin: 2px 0; }
+  .contact-card a { color: var(--ups-blue-light); text-decoration: none; }
+
+  .tip-box {
+    background: #fff8e1; border-left: 4px solid var(--ups-gold); border-radius: 8px;
+    padding: 14px 18px; margin: 16px 0; font-size: 13.5px; color: #6d5600;
+  }
+  .tip-box strong { color: #9a7b00; }
+
+  /* LIGHTBOX */
+  .lightbox {
+    display: none; position: fixed; top:0; left:0; width:100%; height:100%;
+    background: rgba(0,0,0,.85); z-index: 1000; align-items: center; justify-content: center; cursor: pointer;
+  }
+  .lightbox.open { display: flex; }
+  .lightbox img { max-width: 92%; max-height: 92%; border-radius: 8px; }
+
+  /* HOME GRID */
+  .home-grid {
+    display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 18px; margin-top: 24px;
+  }
+  .home-card {
+    background: #fff; border-radius: 12px; padding: 24px 20px;
+    box-shadow: var(--card-shadow); cursor: pointer; transition: all .2s;
+    text-align: center; border: 2px solid transparent;
+  }
+  .home-card:hover { border-color: var(--ups-gold); transform: translateY(-3px); box-shadow: 0 6px 24px rgba(0,0,0,.1); }
+  .home-card .card-icon { font-size: 36px; margin-bottom: 12px; }
+  .home-card h3 { font-size: 14.5px; color: var(--ups-blue); margin-bottom: 6px; }
+  .home-card p { font-size: 12.5px; color: #888; }
+
+  /* RESPONSIVE */
+  @media (max-width: 768px) {
+    .sidebar { transform: translateX(-100%); }
+    .sidebar.open { transform: translateX(0); }
+    .main { margin-left: 0; }
+    .hamburger { display: block; }
+    .content { padding: 20px; }
+    .hero { padding: 32px 24px; }
+    .hero h1 { font-size: 22px; }
+    .contact-grid { grid-template-columns: 1fr; }
+  }
+  .overlay { display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,.4); z-index:99; }
+  .overlay.open { display:block; }
+</style>
+</head>
+<body>
+
+<!-- SIDEBAR -->
+<nav class="sidebar" id="sidebar">
+  <div class="sidebar-header">
+    <div class="sidebar-logo">UPS</div>
+    <h2>Educacion Intercultural Bilingue</h2>
+    <h3>Guia del Estudiante</h3>
+  </div>
+  <div class="nav-section">
+    <div class="nav-section-title">Inicio</div>
+    <a class="nav-item active" data-section="home" onclick="showSection('home')">
+      <span class="nav-icon">&#127968;</span> Pagina Principal
+    </a>
+  </div>
+  <div class="nav-section">
+    <div class="nav-section-title">Plataformas</div>
+    <a class="nav-item" data-section="avac" onclick="showSection('avac')">
+      <span class="nav-icon">&#128187;</span> Acceso al AVAC
+    </a>
+    <a class="nav-item" data-section="2fa" onclick="showSection('2fa')">
+      <span class="nav-icon">&#128274;</span> Activar 2FA
+    </a>
+  </div>
+  <div class="nav-section">
+    <div class="nav-section-title">Consultas Academicas</div>
+    <a class="nav-item" data-section="calificaciones" onclick="showSection('calificaciones')">
+      <span class="nav-icon">&#128203;</span> Ver Calificaciones
+    </a>
+    <a class="nav-item" data-section="record" onclick="showSection('record')">
+      <span class="nav-icon">&#128196;</span> Descargar Record
+    </a>
+    <a class="nav-item" data-section="evaluacion" onclick="showSection('evaluacion')">
+      <span class="nav-icon">&#11088;</span> Evaluacion Docente
+    </a>
+  </div>
+  <div class="nav-section">
+    <div class="nav-section-title">Tramites</div>
+    <a class="nav-item" data-section="practica" onclick="showSection('practica')">
+      <span class="nav-icon">&#128221;</span> Solicitud de Practica
+    </a>
+    <a class="nav-item" data-section="adicion" onclick="showSection('adicion')">
+      <span class="nav-icon">&#128209;</span> Adicion de Creditos
+    </a>
+  </div>
+  <div class="nav-section">
+    <div class="nav-section-title">Finanzas</div>
+    <a class="nav-item" data-section="deudas" onclick="showSection('deudas')">
+      <span class="nav-icon">&#128176;</span> Revisar Deudas
+    </a>
+  </div>
+  <div class="nav-section">
+    <div class="nav-section-title">Cuenta y Seguridad</div>
+    <a class="nav-item" data-section="contrasena" onclick="showSection('contrasena')">
+      <span class="nav-icon">&#128272;</span> Recuperar Contrasena
+    </a>
+    <a class="nav-item" data-section="correo" onclick="showSection('correo')">
+      <span class="nav-icon">&#9993;</span> Escribir un Correo
+    </a>
+  </div>
+  <div class="nav-section">
+    <div class="nav-section-title">Contacto</div>
+    <a class="nav-item" data-section="canales" onclick="showSection('canales')">
+      <span class="nav-icon">&#128222;</span> Canales de Comunicacion
+    </a>
+  </div>
+</nav>
+
+<div class="overlay" id="overlay" onclick="toggleSidebar()"></div>
+
+<!-- MAIN CONTENT -->
+<div class="main">
+  <div class="top-bar">
+    <button class="hamburger" onclick="toggleSidebar()">&#9776;</button>
+    <h1 id="topTitle">Guia del Estudiante UPS - EIB</h1>
+    <span class="breadcrumb" id="breadcrumb">Inicio</span>
+  </div>
+
+  <div class="content">
+
+    <!-- HOME -->
+    <div class="section active" id="sec-home">
+      <div class="hero">
+        <h1>Bienvenido a la Guia del Estudiante</h1>
+        <p>Universidad Politecnica Salesiana - Educacion Intercultural Bilingue<br>
+        Aqui encontraras tutoriales paso a paso para realizar tus tramites academicos, consultar informacion y resolver problemas comunes.</p>
+      </div>
+      <h2 style="font-size:18px; color:var(--ups-blue); margin-bottom: 4px;">Accesos rapidos</h2>
+      <p style="font-size:13px; color:#888; margin-bottom:16px;">Selecciona un tema para ver el tutorial completo</p>
+      <div class="home-grid">
+        <div class="home-card" onclick="showSection('avac')">
+          <div class="card-icon">&#128187;</div>
+          <h3>Acceso al AVAC</h3>
+          <p>Ingresa a tus aulas virtuales</p>
+        </div>
+        <div class="home-card" onclick="showSection('calificaciones')">
+          <div class="card-icon">&#128203;</div>
+          <h3>Ver Calificaciones</h3>
+          <p>Consulta tus notas por asignatura</p>
+        </div>
+        <div class="home-card" onclick="showSection('contrasena')">
+          <div class="card-icon">&#128272;</div>
+          <h3>Recuperar Contrasena</h3>
+          <p>Restablece tu clave de acceso</p>
+        </div>
+        <div class="home-card" onclick="showSection('deudas')">
+          <div class="card-icon">&#128176;</div>
+          <h3>Revisar Deudas</h3>
+          <p>Consulta tu estado de cuenta</p>
+        </div>
+        <div class="home-card" onclick="showSection('evaluacion')">
+          <div class="card-icon">&#11088;</div>
+          <h3>Evaluacion Docente</h3>
+          <p>Evalua a tus profesores</p>
+        </div>
+        <div class="home-card" onclick="showSection('record')">
+          <div class="card-icon">&#128196;</div>
+          <h3>Descargar Record</h3>
+          <p>Obtiene tu record academico en PDF</p>
+        </div>
+        <div class="home-card" onclick="showSection('practica')">
+          <div class="card-icon">&#128221;</div>
+          <h3>Solicitud de Practica</h3>
+          <p>Tramite de asignacion de practica</p>
+        </div>
+        <div class="home-card" onclick="showSection('correo')">
+          <div class="card-icon">&#9993;</div>
+          <h3>Escribir un Correo</h3>
+          <p>Como redactar un correo formal</p>
+        </div>
+        <div class="home-card" onclick="showSection('2fa')">
+          <div class="card-icon">&#128274;</div>
+          <h3>Activar 2FA</h3>
+          <p>Seguridad de doble factor</p>
+        </div>
+        <div class="home-card" onclick="showSection('canales')">
+          <div class="card-icon">&#128222;</div>
+          <h3>Canales de Comunicacion</h3>
+          <p>Contactos oficiales de la carrera</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- AVAC -->
+    <div class="section" id="sec-avac">
+      <h2 class="section-title">Pasos para entrar al AVAC</h2>
+      <p class="section-desc">El AVAC (Ambientes Virtuales de Aprendizaje Cooperativo) es la plataforma donde encontraras tus aulas virtuales, materiales de clase, tareas y enlaces de videoconferencias.</p>
+      <div class="step-card">
+        <div class="step-header"><div class="step-number">1</div><div class="step-title">Ingresar a la pagina web de la UPS</div></div>
+        <p class="step-text">Entra a <strong>ups.edu.ec</strong> y da clic en el boton <strong>"Acceder"</strong> que se encuentra en la esquina superior derecha.</p>
+        <div class="step-img-container"><img class="step-img" src="Acceso al AVAC/1.jpg" alt="Paso 1" onclick="openLightbox(this)"></div>
+      </div>
+      <div class="step-card">
+        <div class="step-header"><div class="step-number">2</div><div class="step-title">Ingresar tus credenciales</div></div>
+        <p class="step-text">Escribe tu <strong>correo institucional</strong> (ejemplo: tunombre@est.ups.edu.ec) y tu <strong>contrasena</strong>. Luego da clic en "Iniciar sesion".</p>
+        <div class="step-img-container"><img class="step-img" src="Acceso al AVAC/2.jpg" alt="Paso 2" onclick="openLightbox(this)"></div>
+      </div>
+      <div class="step-card">
+        <div class="step-header"><div class="step-number">3</div><div class="step-title">Hacer clic en AVAC</div></div>
+        <p class="step-text">Una vez dentro del portal, busca la seccion <strong>"AVAC"</strong> (Ambientes Virtuales de Aprendizaje Cooperativo) y haz clic en el enlace.</p>
+        <div class="step-img-container"><img class="step-img" src="Acceso al AVAC/3.jpg" alt="Paso 3" onclick="openLightbox(this)"></div>
+      </div>
+      <div class="step-card">
+        <div class="step-header"><div class="step-number">4</div><div class="step-title">Autenticacion en Microsoft</div></div>
+        <p class="step-text">Se abrira la ventana de inicio de sesion de Microsoft. Ingresa tu <strong>correo institucional</strong> y haz clic en "Siguiente", luego escribe tu <strong>contrasena</strong> y da clic en "Iniciar sesion".</p>
+        <div class="step-img-container"><img class="step-img" src="Acceso al AVAC/4.jpg" alt="Paso 4" onclick="openLightbox(this)"></div>
+      </div>
+      <div class="step-card">
+        <div class="step-header"><div class="step-number">5</div><div class="step-title">Seleccionar tu modalidad</div></div>
+        <p class="step-text">Da clic en la tarjeta <strong>"EN LINEA - Vigente"</strong> que muestra tu plataforma unica y el numero de cursos en los que estas matriculado.</p>
+        <div class="step-img-container"><img class="step-img" src="Acceso al AVAC/5.jpg" alt="Paso 5" onclick="openLightbox(this)"></div>
+      </div>
+      <div class="step-card">
+        <div class="step-header"><div class="step-number">6</div><div class="step-title">Acceder a tus aulas virtuales</div></div>
+        <p class="step-text">Veras todas tus asignaturas organizadas en tarjetas de colores. Haz clic en la materia que deseas para ingresar a su aula virtual.</p>
+        <div class="step-img-container"><img class="step-img" src="Acceso al AVAC/6.jpg" alt="Paso 6" onclick="openLightbox(this)"></div>
+      </div>
+      <div class="step-card">
+        <div class="step-header"><div class="step-number">7</div><div class="step-title">Entorno del aula virtual</div></div>
+        <p class="step-text">Dentro del aula encontraras: el <strong>nombre de la asignatura</strong> y del profesor, las <strong>unidades de contenido</strong>, los <strong>enlaces a clases en vivo</strong> (Zoom), las <strong>actividades de aprendizaje</strong>, <strong>recursos</strong> descargables y la seccion de <strong>entrega de tareas</strong>.</p>
+        <div class="step-img-container"><img class="step-img" src="Acceso al AVAC/7.jpg" alt="Paso 7" onclick="openLightbox(this)"></div>
+      </div>
+      <div class="tip-box"><strong>Consejo:</strong> Recuerda cerrar sesion al terminar, especialmente si usas un computador compartido.</div>
+    </div>
+
+    <!-- CALIFICACIONES -->
+    <div class="section" id="sec-calificaciones">
+      <h2 class="section-title">Pasos para revisar tus calificaciones</h2>
+      <p class="section-desc">Consulta tus aportes y calificaciones finales de cada asignatura. La nota minima para aprobar es de 70/100.</p>
+      <div class="step-card">
+        <div class="step-header"><div class="step-number">1</div><div class="step-title">Ingresar a la pagina web de la UPS</div></div>
+        <p class="step-text">Entra a <strong>ups.edu.ec</strong> y da clic en <strong>"Acceder"</strong> en la esquina superior derecha.</p>
+        <div class="step-img-container"><img class="step-img" src="Calificaciones/1.jpg" alt="Paso 1" onclick="openLightbox(this)"></div>
+      </div>
+      <div class="step-card">
+        <div class="step-header"><div class="step-number">2</div><div class="step-title">Ingresar credenciales</div></div>
+        <p class="step-text">Escribe tu <strong>correo institucional</strong> y tu <strong>contrasena</strong>, luego haz clic en "Iniciar sesion".</p>
+        <div class="step-img-container"><img class="step-img" src="Calificaciones/2.jpg" alt="Paso 2" onclick="openLightbox(this)"></div>
+      </div>
+      <div class="step-card">
+        <div class="step-header"><div class="step-number">3</div><div class="step-title">Ir a Calificaciones</div></div>
+        <p class="step-text">En el menu izquierdo de <strong>"Estudiante"</strong>, haz clic en <strong>"Calificaciones"</strong>. Luego selecciona la pestana <strong>"Grado"</strong>. Veras una lista de asignaturas ordenadas por nivel con los aportes y la <strong>calificacion final</strong>.</p>
+        <div class="step-img-container"><img class="step-img" src="Calificaciones/3.jpg" alt="Paso 3" onclick="openLightbox(this)"></div>
+      </div>
+      <div class="tip-box"><strong>Recuerda:</strong> La nota minima para aprobar es de <strong>70/100</strong>.</div>
+    </div>
+
+    <!-- RECUPERAR CONTRASENA -->
+    <div class="section" id="sec-contrasena">
+      <h2 class="section-title">Pasos para recuperar tu contrasena</h2>
+      <p class="section-desc">Si olvidaste tu contrasena del portal UPS, sigue estos pasos para restablecerla. La nueva contrasena debe contener mayusculas, minusculas y numeros.</p>
+      <div class="step-card">
+        <div class="step-header"><div class="step-number">1</div><div class="step-title">Ir a la pagina de la UPS</div></div>
+        <p class="step-text">Entra a <strong>ups.edu.ec</strong> y da clic en <strong>"Iniciar sesion"</strong>.</p>
+        <div class="step-img-container"><img class="step-img" src="Recuperar contraseña/1.jpg" alt="Paso 1" onclick="openLightbox(this)"></div>
+      </div>
+      <div class="step-card">
+        <div class="step-header"><div class="step-number">2</div><div class="step-title">Clic en "Recordar Contrasena"</div></div>
+        <p class="step-text">En la pantalla de inicio de sesion, haz clic en el enlace <strong>"Recordar Contrasena"</strong> que aparece debajo del boton "Iniciar sesion".</p>
+        <div class="step-img-container"><img class="step-img" src="Recuperar contraseña/2.jpg" alt="Paso 2" onclick="openLightbox(this)"></div>
+      </div>
+      <div class="step-card">
+        <div class="step-header"><div class="step-number">3</div><div class="step-title">Ingresar correo institucional</div></div>
+        <p class="step-text">Escribe tu <strong>correo institucional</strong> completo (ejemplo: tunombre@est.ups.edu.ec) y haz clic en <strong>"Continuar"</strong>.</p>
+        <div class="step-img-container"><img class="step-img" src="Recuperar contraseña/3.jpg" alt="Paso 3" onclick="openLightbox(this)"></div>
+      </div>
+      <div class="step-card">
+        <div class="step-header"><div class="step-number">4</div><div class="step-title">Completar verificacion</div></div>
+        <p class="step-text">Desliza la <strong>barra de verificacion</strong> hacia la derecha para confirmar que no eres un robot, y luego haz clic en <strong>"Continuar"</strong>.</p>
+        <div class="step-img-container"><img class="step-img" src="Recuperar contraseña/4.jpg" alt="Paso 4" onclick="openLightbox(this)"></div>
+      </div>
+      <div class="step-card">
+        <div class="step-header"><div class="step-number">5</div><div class="step-title">Verificar correo de recuperacion</div></div>
+        <p class="step-text">El sistema mostrara las <strong>opciones de recuperacion</strong>. Confirma que el correo de recuperacion es correcto y haz clic en <strong>"Continuar"</strong>. Te llegara un correo electronico.</p>
+        <div class="step-img-container"><img class="step-img" src="Recuperar contraseña/5.jpg" alt="Paso 5" onclick="openLightbox(this)"></div>
+      </div>
+      <div class="step-card">
+        <div class="step-header"><div class="step-number">6</div><div class="step-title">Restablecer desde el correo</div></div>
+        <p class="step-text">Abre el correo que recibiste de <strong>no-reply@ups.edu.ec</strong>, haz clic en el <strong>enlace</strong> que contiene. Se abrira una pagina donde podras ingresar tu <strong>nueva contrasena</strong>.</p>
+        <div class="step-img-container"><img class="step-img" src="Recuperar contraseña/6.jpg" alt="Paso 6" onclick="openLightbox(this)"></div>
+      </div>
+      <div class="tip-box"><strong>Importante:</strong> La nueva contrasena debe contener <strong>mayusculas, minusculas y numeros</strong>.</div>
+    </div>
+
+    <!-- DEUDAS -->
+    <div class="section" id="sec-deudas">
+      <h2 class="section-title">Pasos para revisar tus deudas pendientes</h2>
+      <p class="section-desc">Consulta tu estado de cuenta para ver deudas pendientes, fechas de vencimiento y montos por pagar.</p>
+      <div class="step-card">
+        <div class="step-header"><div class="step-number">1</div><div class="step-title">Ingresar a la pagina web de la UPS</div></div>
+        <p class="step-text">Entra a <strong>ups.edu.ec</strong> y da clic en <strong>"Acceder"</strong>.</p>
+        <div class="step-img-container"><img class="step-img" src="Deudas/1.jpg" alt="Paso 1" onclick="openLightbox(this)"></div>
+      </div>
+      <div class="step-card">
+        <div class="step-header"><div class="step-number">2</div><div class="step-title">Ingresar credenciales</div></div>
+        <p class="step-text">Escribe tu <strong>correo institucional</strong> y <strong>contrasena</strong>, luego da clic en "Iniciar sesion".</p>
+        <div class="step-img-container"><img class="step-img" src="Deudas/2.jpg" alt="Paso 2" onclick="openLightbox(this)"></div>
+      </div>
+      <div class="step-card">
+        <div class="step-header"><div class="step-number">3</div><div class="step-title">Ir a Estado de Cuenta</div></div>
+        <p class="step-text">En el menu izquierdo, haz clic en <strong>"Estado de Cuenta"</strong>, luego en la pestana <strong>"Deudas Pendientes"</strong>. Ahi se desplegaran todas tus deudas con las <strong>fechas de vencimiento</strong> y <strong>montos</strong>. Tambien revisa la pestana <strong>"Prefacturas Pendientes"</strong>.</p>
+        <div class="step-img-container"><img class="step-img" src="Deudas/3.jpg" alt="Paso 3" onclick="openLightbox(this)"></div>
+      </div>
+      <div class="tip-box"><strong>Nota:</strong> Los valores presentados deben ser cancelados antes de la fecha de vencimiento. Revisa tambien las <strong>Prefacturas Pendientes</strong> en el mismo menu.</div>
+    </div>
+
+    <!-- EVALUACION DOCENTE -->
+    <div class="section" id="sec-evaluacion">
+      <h2 class="section-title">Pasos para hacer la evaluacion docente</h2>
+      <p class="section-desc">La evaluacion docente es un proceso obligatorio donde calificas a tus profesores. Es importante para la mejora continua de la calidad educativa.</p>
+      <div class="step-card">
+        <div class="step-header"><div class="step-number">1</div><div class="step-title">Ingresar a la pagina web de la UPS</div></div>
+        <p class="step-text">Entra a <strong>ups.edu.ec</strong> y da clic en <strong>"Iniciar sesion"</strong>.</p>
+        <div class="step-img-container"><img class="step-img" src="Evaluacion docente/1.jpg" alt="Paso 1" onclick="openLightbox(this)"></div>
+      </div>
+      <div class="step-card">
+        <div class="step-header"><div class="step-number">2</div><div class="step-title">Ingresar credenciales</div></div>
+        <p class="step-text">Escribe tu <strong>correo institucional</strong> y <strong>contrasena</strong>.</p>
+        <div class="step-img-container"><img class="step-img" src="Evaluacion docente/2.jpg" alt="Paso 2" onclick="openLightbox(this)"></div>
+      </div>
+      <div class="step-card">
+        <div class="step-header"><div class="step-number">3</div><div class="step-title">Ir a Evaluacion Docente</div></div>
+        <p class="step-text">En el menu lateral izquierdo, haz clic en <strong>"Evaluacion Docente Academicas y Paracademicos"</strong>. Se abrira el sistema de evaluaciones.</p>
+        <div class="step-img-container"><img class="step-img" src="Evaluacion docente/3.jpg" alt="Paso 3" onclick="openLightbox(this)"></div>
+      </div>
+      <div class="step-card">
+        <div class="step-header"><div class="step-number">4</div><div class="step-title">Seleccionar Evaluaciones de Grado</div></div>
+        <p class="step-text">En el Sistema de Evaluaciones, haz clic en <strong>"Evaluaciones de Grado"</strong> para ver la lista de docentes que debes evaluar.</p>
+        <div class="step-img-container"><img class="step-img" src="Evaluacion docente/4.jpg" alt="Paso 4" onclick="openLightbox(this)"></div>
+      </div>
+      <div class="step-card">
+        <div class="step-header"><div class="step-number">5</div><div class="step-title">Evaluar a cada docente</div></div>
+        <p class="step-text">Veras una tabla con tus asignaturas y los docentes. Haz clic en cada uno para completar la evaluacion. Cuando termines, aparecera una <strong>marca verde</strong> en la columna "Estado".</p>
+        <div class="step-img-container"><img class="step-img" src="Evaluacion docente/5.jpg" alt="Paso 5" onclick="openLightbox(this)"></div>
+      </div>
+      <div class="tip-box"><strong>Importante:</strong> La evaluacion docente es <strong>obligatoria</strong> y debe completarse dentro del plazo establecido por la universidad.</div>
+    </div>
+
+    <!-- RECORD -->
+    <div class="section" id="sec-record">
+      <h2 class="section-title">Pasos para descargar tu record academico</h2>
+      <p class="section-desc">El record academico es un documento oficial que resume todas tus calificaciones. Puedes descargarlo en formato PDF.</p>
+      <div class="step-card">
+        <div class="step-header"><div class="step-number">1</div><div class="step-title">Ingresar a la pagina web de la UPS</div></div>
+        <p class="step-text">Entra a <strong>ups.edu.ec</strong> y da clic en <strong>"Acceder"</strong>.</p>
+        <div class="step-img-container"><img class="step-img" src="Record/1.jpg" alt="Paso 1" onclick="openLightbox(this)"></div>
+      </div>
+      <div class="step-card">
+        <div class="step-header"><div class="step-number">2</div><div class="step-title">Ingresar credenciales</div></div>
+        <p class="step-text">Escribe tu <strong>correo institucional</strong> y <strong>contrasena</strong>, luego da clic en "Iniciar sesion".</p>
+        <div class="step-img-container"><img class="step-img" src="Record/2.jpg" alt="Paso 2" onclick="openLightbox(this)"></div>
+      </div>
+      <div class="step-card">
+        <div class="step-header"><div class="step-number">3</div><div class="step-title">Descargar Record Academico</div></div>
+        <p class="step-text">En el menu izquierdo, haz clic en <strong>"Record Academico"</strong>. Se mostrara tu historial completo con todas las asignaturas, creditos y calificaciones. Haz clic en el boton <strong>"Imprimir Record Academico"</strong> (esquina superior derecha) para descargarlo como <strong>PDF</strong>.</p>
+        <div class="step-img-container"><img class="step-img" src="Record/3.jpg" alt="Paso 3" onclick="openLightbox(this)"></div>
+      </div>
+    </div>
+
+    <!-- PRACTICA -->
+    <div class="section" id="sec-practica">
+      <h2 class="section-title">Pasos para hacer la solicitud de practica</h2>
+      <p class="section-desc">Tramite para solicitar la asignacion de practica pre profesional a traves del Sistema de Solicitudes.</p>
+      <div class="step-card">
+        <div class="step-header"><div class="step-number">1</div><div class="step-title">Ingresar y autenticarse</div></div>
+        <p class="step-text">Entra a <strong>ups.edu.ec</strong>, da clic en <strong>"Iniciar sesion"</strong> e ingresa tu <strong>correo institucional</strong> y <strong>contrasena</strong>.</p>
+        <div class="step-img-container"><img class="step-img" src="Tramite asignacion de practica/1.jpg" alt="Paso 1" onclick="openLightbox(this)"></div>
+      </div>
+      <div class="step-card">
+        <div class="step-header"><div class="step-number">2</div><div class="step-title">Ir a Sistema de Solicitudes</div></div>
+        <p class="step-text">En el menu lateral izquierdo de <strong>"Estudiante"</strong>, busca y haz clic en <strong>"Sistema de Solicitudes"</strong>. Luego da clic en <strong>"Nueva Solicitud"</strong>.</p>
+        <div class="step-img-container"><img class="step-img" src="Tramite asignacion de practica/2.jpg" alt="Paso 2" onclick="openLightbox(this)"></div>
+      </div>
+      <div class="step-card">
+        <div class="step-header"><div class="step-number">3</div><div class="step-title">Seleccionar tipo de solicitud</div></div>
+        <p class="step-text">En la lista de Asuntos Academicos, selecciona <strong>"Solicitud de Autorizacion de Inscripcion de Asignatura de Practica Pre Profesional"</strong> y haz clic en <strong>"Continuar"</strong>.</p>
+        <div class="step-img-container"><img class="step-img" src="Tramite asignacion de practica/3.jpg" alt="Paso 3" onclick="openLightbox(this)"></div>
+      </div>
+      <div class="tip-box"><strong>Nota:</strong> Despues de enviar la solicitud, revisa periodicamente el estado en el Sistema de Solicitudes hasta que aparezca como <strong>"Aprobado"</strong>.</div>
+    </div>
+
+    <!-- ADICION DE CREDITOS -->
+    <div class="section" id="sec-adicion">
+      <h2 class="section-title">Tramite de adicion de creditos (Practica V)</h2>
+      <p class="section-desc">Proceso para solicitar la adicion de creditos para Practica V u otras asignaturas a traves del Sistema de Solicitudes.</p>
+      <div class="step-card">
+        <div class="step-header"><div class="step-number">1</div><div class="step-title">Ingresar a la pagina de la UPS</div></div>
+        <p class="step-text">Entra a <strong>ups.edu.ec</strong> y da clic en <strong>"Acceder"</strong>.</p>
+        <div class="step-img-container"><img class="step-img" src="Tramite de adicion de creditos/1.jpg" alt="Paso 1" onclick="openLightbox(this)"></div>
+      </div>
+      <div class="step-card">
+        <div class="step-header"><div class="step-number">2</div><div class="step-title">Ingresar credenciales</div></div>
+        <p class="step-text">Escribe tu <strong>correo institucional</strong> y <strong>contrasena</strong>.</p>
+        <div class="step-img-container"><img class="step-img" src="Tramite de adicion de creditos/2.jpg" alt="Paso 2" onclick="openLightbox(this)"></div>
+      </div>
+      <div class="step-card">
+        <div class="step-header"><div class="step-number">3</div><div class="step-title">Verificar solicitud de practica aprobada</div></div>
+        <p class="step-text">Ve a <strong>"Sistema de Solicitudes"</strong> y verifica que tu solicitud de asignacion de practica este en estado <strong>"Aprobado"</strong>. Si es asi, haz clic en <strong>"Nueva Solicitud"</strong>.</p>
+        <div class="step-img-container"><img class="step-img" src="Tramite de adicion de creditos/3.jpg" alt="Paso 3" onclick="openLightbox(this)"></div>
+      </div>
+      <div class="step-card">
+        <div class="step-header"><div class="step-number">4</div><div class="step-title">Seleccionar Solicitud General</div></div>
+        <p class="step-text">En la seccion de <strong>Asuntos Administrativos</strong>, selecciona <strong>"Solicitud General"</strong> y haz clic en <strong>"Continuar"</strong>.</p>
+        <div class="step-img-container"><img class="step-img" src="Tramite de adicion de creditos/4.jpg" alt="Paso 4" onclick="openLightbox(this)"></div>
+      </div>
+      <div class="step-card">
+        <div class="step-header"><div class="step-number">5</div><div class="step-title">Escribir la solicitud</div></div>
+        <p class="step-text">Completa el formulario: en <strong>Asunto</strong> escribe "Solicitud de adicion de creditos". En <strong>Destinatario</strong> busca al Director de carrera. En <strong>Contenido</strong> detalla el motivo de tu solicitud (la materia y el periodo). Finalmente haz clic en <strong>"Guardar solicitud"</strong>.</p>
+        <div class="step-img-container"><img class="step-img" src="Tramite de adicion de creditos/5.jpg" alt="Paso 5" onclick="openLightbox(this)"></div>
+      </div>
+    </div>
+
+    <!-- CORREO -->
+    <div class="section" id="sec-correo">
+      <h2 class="section-title">Como escribir correctamente un correo electronico</h2>
+      <p class="section-desc">Guia para redactar un correo formal dirigido a tus profesores o la coordinacion de carrera.</p>
+      <div class="info-card">
+        <h3>Estructura de un correo formal</h3>
+        <p>Todo correo academico debe incluir los siguientes elementos:</p>
+        <div style="margin-top: 16px;">
+          <div class="step-card" style="border-left-color: #2196F3;">
+            <div class="step-header"><div class="step-number" style="background:#2196F3;">1</div><div class="step-title">Destinatario (Para)</div></div>
+            <p class="step-text">Escribe el correo del profesor o coordinador al que te diriges.</p>
+          </div>
+          <div class="step-card" style="border-left-color: #2196F3;">
+            <div class="step-header"><div class="step-number" style="background:#2196F3;">2</div><div class="step-title">Con copia (CC)</div></div>
+            <p class="step-text">Si es necesario, agrega en copia al coordinador de carrera u otra persona relevante.</p>
+          </div>
+          <div class="step-card" style="border-left-color: #2196F3;">
+            <div class="step-header"><div class="step-number" style="background:#2196F3;">3</div><div class="step-title">Asunto</div></div>
+            <p class="step-text">Escribe un asunto claro y breve. Ejemplo: "Entrega Actividad 1".</p>
+          </div>
+          <div class="step-card" style="border-left-color: #2196F3;">
+            <div class="step-header"><div class="step-number" style="background:#2196F3;">4</div><div class="step-title">Saludo</div></div>
+            <p class="step-text">Inicia con un saludo respetuoso: "Buenas tardes, licenciado/a".</p>
+          </div>
+          <div class="step-card" style="border-left-color: #2196F3;">
+            <div class="step-header"><div class="step-number" style="background:#2196F3;">5</div><div class="step-title">Presentacion y pedido</div></div>
+            <p class="step-text">Presentate brevemente (nombre, nivel, centro de apoyo) y explica el motivo del correo de manera clara y respetuosa.</p>
+          </div>
+          <div class="step-card" style="border-left-color: #2196F3;">
+            <div class="step-header"><div class="step-number" style="background:#2196F3;">6</div><div class="step-title">Despedida</div></div>
+            <p class="step-text">Cierra con "Muchas gracias," o "Atentamente," seguido de tu nombre.</p>
+          </div>
+        </div>
+      </div>
+      <div class="step-img-container" style="margin-top:8px;"><img class="step-img" src="Enviar un Correo_Mesa de trabajo 1.jpg" alt="Ejemplo de correo" onclick="openLightbox(this)" style="max-height:500px;"></div>
+    </div>
+
+    <!-- 2FA -->
+    <div class="section" id="sec-2fa">
+      <h2 class="section-title">Activar autenticacion de doble factor (2FA)</h2>
+      <p class="section-desc">La autenticacion de doble factor agrega una capa extra de seguridad a tu correo institucional. Es un requisito obligatorio de la universidad.</p>
+      <div class="info-card">
+        <h3>Recursos disponibles</h3>
+        <p>La universidad proporciona los siguientes materiales para guiarte en la activacion del 2FA:</p>
+        <div style="margin-top: 16px;">
+          <div class="step-card">
+            <div class="step-header"><div class="step-number">&#128249;</div><div class="step-title">Video tutorial</div></div>
+            <p class="step-text">Mira el video tutorial completo en YouTube:<br><a href="https://www.youtube.com/watch?v=YoFvPqHpZuY&t=1s" target="_blank" style="color: var(--ups-blue); font-weight:600;">Ver video tutorial de activacion 2FA</a></p>
+          </div>
+          <div class="step-card">
+            <div class="step-header"><div class="step-number">&#128196;</div><div class="step-title">Instructivo PDF</div></div>
+            <p class="step-text">Descarga el instructivo oficial para acceder al e-mail institucional con multifactor:<br><a href="2FA/1INRE-ITRA-0002-0040_Instructivo_Para_Acceder_Al_E-mail_institucional_Con_Multifactor_V3.pdf" target="_blank" style="color: var(--ups-blue); font-weight:600;">Descargar instructivo (PDF)</a></p>
+          </div>
+          <div class="step-card">
+            <div class="step-header"><div class="step-number">&#128214;</div><div class="step-title">Tutorial de Comunicacion UPS</div></div>
+            <p class="step-text">Tutorial adicional elaborado por Comunicacion UPS Quito:<br><a href="2FA/Tutorial para activar 2FA - Comunicación UPS Quito.pdf" target="_blank" style="color: var(--ups-blue); font-weight:600;">Ver tutorial 2FA (PDF)</a></p>
+          </div>
+        </div>
+      </div>
+      <div class="tip-box"><strong>Importante:</strong> La activacion del 2FA es <strong>obligatoria</strong>. Si tienes problemas, contacta al soporte tecnico de la universidad.</div>
+    </div>
+
+    <!-- CANALES -->
+    <div class="section" id="sec-canales">
+      <h2 class="section-title">Canales oficiales de comunicacion</h2>
+      <p class="section-desc">Contactos oficiales de la carrera de Educacion Intercultural Bilingue y los centros de apoyo.</p>
+      <div class="info-card">
+        <h3>Numeros de Admisiones</h3>
+        <div class="contact-grid">
+          <div class="contact-card">
+            <h4>Admisiones Quito</h4>
+            <p><strong>099 844 7486</strong></p>
+          </div>
+          <div class="contact-card">
+            <h4>Admisiones Carreras en Linea</h4>
+            <p><strong>098 738 7203</strong></p>
+          </div>
+        </div>
+      </div>
+      <div class="info-card">
+        <h3>Coordinadores de Centros de Apoyo</h3>
+        <div class="contact-grid">
+          <div class="contact-card">
+            <h4>Cayambe</h4>
+            <p>Carlos Vasconez P.</p>
+            <p><strong>099 921 3871</strong></p>
+            <p><a href="mailto:cvasconez@ups.edu.ec">cvasconez@ups.edu.ec</a></p>
+          </div>
+          <div class="contact-card">
+            <h4>Otavalo</h4>
+            <p>Teresa Vaca</p>
+            <p><strong>099 201 3134</strong></p>
+            <p><a href="mailto:tvaca@ups.edu.ec">tvaca@ups.edu.ec</a></p>
+          </div>
+          <div class="contact-card">
+            <h4>Riobamba</h4>
+            <p>Victor Oquendo</p>
+            <p><strong>099 843 9875</strong></p>
+            <p><a href="mailto:voquendo@ups.edu.ec">voquendo@ups.edu.ec</a></p>
+          </div>
+          <div class="contact-card">
+            <h4>Latacunga</h4>
+            <p>Gladys Castro</p>
+            <p><strong>099 534 6419</strong></p>
+            <p><a href="mailto:gcastro@ups.edu.ec">gcastro@ups.edu.ec</a></p>
+          </div>
+        </div>
+      </div>
+      <div class="step-img-container" style="margin-top:16px;"><img class="step-img" src="canales de comunicacion-01.jpg" alt="Canales de comunicacion" onclick="openLightbox(this)" style="max-height:500px;"></div>
+    </div>
+
+  </div>
+</div>
+
+<!-- LIGHTBOX -->
+<div class="lightbox" id="lightbox" onclick="closeLightbox()">
+  <img id="lightboxImg" src="" alt="Imagen ampliada">
+</div>
+
+<script>
+function showSection(id) {
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+  document.getElementById('sec-' + id).classList.add('active');
+  document.querySelector('[data-section="' + id + '"]').classList.add('active');
+  const titles = {
+    home: 'Inicio', avac: 'Acceso al AVAC', calificaciones: 'Calificaciones',
+    contrasena: 'Recuperar Contrasena', deudas: 'Deudas Pendientes',
+    evaluacion: 'Evaluacion Docente', record: 'Record Academico',
+    practica: 'Solicitud de Practica', adicion: 'Adicion de Creditos',
+    correo: 'Escribir un Correo', '2fa': 'Activar 2FA', canales: 'Canales de Comunicacion'
+  };
+  document.getElementById('breadcrumb').textContent = titles[id] || id;
+  // Close sidebar on mobile
+  document.getElementById('sidebar').classList.remove('open');
+  document.getElementById('overlay').classList.remove('open');
+  window.scrollTo(0, 0);
+}
+function toggleSidebar() {
+  document.getElementById('sidebar').classList.toggle('open');
+  document.getElementById('overlay').classList.toggle('open');
+}
+function openLightbox(img) {
+  document.getElementById('lightboxImg').src = img.src;
+  document.getElementById('lightbox').classList.add('open');
+}
+function closeLightbox() {
+  document.getElementById('lightbox').classList.remove('open');
+}
+document.addEventListener('keydown', e => { if(e.key==='Escape') closeLightbox(); });
+</script>
+</body>
+</html>
