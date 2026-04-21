@@ -716,10 +716,33 @@ function showSection(id) {
   document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
   document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
   document.getElementById('sec-' + id).classList.add('active');
-  document.querySelector('[data-section="' + id + '"]').classList.add('active');
-  const titles = {
+  var navItem = document.querySelector('[data-section="' + id + '"]');
+  if (navItem) navItem.classList.add('active');
+  var titles = {
     home: 'Inicio', avac: 'Acceso al AVAC', calificaciones: 'Calificaciones',
-document.addEventListener('keydown', e => { if(e.key==='Escape') closeLightbox(); });
+    contrasena: 'Recuperar Contrase\u00f1a', deudas: 'Deudas Pendientes',
+    evaluacion: 'Evaluaci\u00f3n Docente', record: 'R\u00e9cord Acad\u00e9mico',
+    practica: 'Solicitud de Pr\u00e1ctica', adicion: 'Adici\u00f3n de Cr\u00e9ditos',
+    correo: 'Escribir un Correo', '2fa': 'Activar 2FA',
+    carnet: 'Carnet Digital', canales: 'Canales de Comunicaci\u00f3n'
+  };
+  document.getElementById('breadcrumb').textContent = titles[id] || id;
+  document.getElementById('sidebar').classList.remove('open');
+  document.getElementById('overlay').classList.remove('open');
+  window.scrollTo(0, 0);
+}
+function toggleSidebar() {
+  document.getElementById('sidebar').classList.toggle('open');
+  document.getElementById('overlay').classList.toggle('open');
+}
+function openLightbox(img) {
+  document.getElementById('lightboxImg').src = img.src;
+  document.getElementById('lightbox').classList.add('open');
+}
+function closeLightbox() {
+  document.getElementById('lightbox').classList.remove('open');
+}
+document.addEventListener('keydown', function(e) { if(e.key==='Escape') closeLightbox(); });
 </script>
 </body>
 </html>
