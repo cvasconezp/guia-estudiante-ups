@@ -616,51 +616,29 @@
 
     <!-- CANALES -->
     <div class="section" id="sec-canales">
-      <h2 class="section-title">Canales oficiales de comunicación</h2>
-      <p class="section-desc">Contactos oficiales de Modalidad En Línea y los centros de apoyo.</p>
+      <h2 class="section-title">Contacto</h2>
+      <p class="section-desc">Canales oficiales de comunicación de la Universidad Politécnica Salesiana.</p>
       <div class="info-card">
-        <h3>Números de Admisiones</h3>
+        <h3>Teléfono General</h3>
+        <p style="font-size:18px; margin:8px 0;"><strong>&#128222; (02) 396 2800</strong></p>
+      </div>
+      <div class="info-card">
+        <h3>Contactos de Apoyo al Estudiante</h3>
         <div class="contact-grid">
           <div class="contact-card">
-            <h4>Admisiones Quito</h4>
-            <p><strong>099 844 7486</strong></p>
+            <h4>Bienestar Estudiantil</h4>
+            <p>Gabriela Arias</p>
+            <p><a href="mailto:mariasy@ups.edu.ec">mariasy@ups.edu.ec</a></p>
+            <p><strong>Ext. 1264</strong></p>
           </div>
           <div class="contact-card">
-            <h4>Admisiones Carreras en Línea</h4>
-            <p><strong>098 738 7203</strong></p>
+            <h4>Finanzas y Presupuesto</h4>
+            <p>María Tocachi</p>
+            <p><a href="mailto:mtocachi@ups.edu.ec">mtocachi@ups.edu.ec</a></p>
+            <p><strong>Ext. 1193</strong></p>
           </div>
         </div>
       </div>
-      <div class="info-card">
-        <h3>Coordinadores de Centros de Apoyo</h3>
-        <div class="contact-grid">
-          <div class="contact-card">
-            <h4>Cayambe</h4>
-            <p>Carlos Vásconez P.</p>
-            <p><strong>099 921 3871</strong></p>
-            <p><a href="mailto:cvasconez@ups.edu.ec">cvasconez@ups.edu.ec</a></p>
-          </div>
-          <div class="contact-card">
-            <h4>Otavalo</h4>
-            <p>Teresa Vaca</p>
-            <p><strong>099 201 3134</strong></p>
-            <p><a href="mailto:tvaca@ups.edu.ec">tvaca@ups.edu.ec</a></p>
-          </div>
-          <div class="contact-card">
-            <h4>Riobamba</h4>
-            <p>Víctor Oquendo</p>
-            <p><strong>099 843 9875</strong></p>
-            <p><a href="mailto:voquendo@ups.edu.ec">voquendo@ups.edu.ec</a></p>
-          </div>
-          <div class="contact-card">
-            <h4>Latacunga</h4>
-            <p>Gladys Castro</p>
-            <p><strong>099 534 6419</strong></p>
-            <p><a href="mailto:gcastro@ups.edu.ec">gcastro@ups.edu.ec</a></p>
-          </div>
-        </div>
-      </div>
-      <div class="step-img-container" style="margin-top:16px;"><img class="step-img" src="canales de comunicacion-01.jpg" alt="Canales de comunicacion" onclick="openLightbox(this)" style="max-height:500px;"></div>
     </div>
 
   </div>
@@ -687,4 +665,22 @@ function showSection(id) {
   document.getElementById('breadcrumb').textContent = titles[id] || id;
   // Close sidebar on mobile
   document.getElementById('sidebar').classList.remove('open');
-  document.ge
+  document.getElementById('overlay').classList.remove('open');
+  window.scrollTo(0, 0);
+}
+function toggleSidebar() {
+  document.getElementById('sidebar').classList.toggle('open');
+  document.getElementById('overlay').classList.toggle('open');
+}
+function openLightbox(img) {
+  document.getElementById('lightboxImg').src = img.src;
+  document.getElementById('lightbox').classList.add('open');
+}
+function closeLightbox() {
+  document.getElementById('lightbox').classList.remove('open');
+}
+document.addEventListener('keydown', e => { if(e.key==='Escape') closeLightbox(); });
+</script>
+</body>
+</html>
+                                                                                                                                                                                                                                                                                                                                                                                    
