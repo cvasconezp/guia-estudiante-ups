@@ -55,7 +55,7 @@ export default async function handler(req, res) {
 
   try {
     const sections = ['home','avac','calificaciones','contrasena','deudas',
-      'evaluacion','record','practica','adicion','correo','2fa','carnet','canales'];
+      'evaluacion','record','practica','adicion','correo','2fa','carnet','canales','certificados','pagos','becas'];
 
     const devices = ['desktop', 'mobile', 'tablet'];
     const browsers = ['chrome', 'firefox', 'safari', 'edge', 'opera', 'otro'];
