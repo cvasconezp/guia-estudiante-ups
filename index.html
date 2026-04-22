@@ -208,76 +208,107 @@
     <h3>Guía del Estudiante</h3>
   </div>
   <div class="nav-section">
-    <div class="nav-section-title">Inicio</div>
-    <a class="nav-item active" data-section="home" onclick="showSection('home')">
-      <span class="nav-icon">&#127968;</span> Página Principal
-    </a>
+    <div class="nav-section-title" onclick="toggleNav(this)">Inicio</div>
+    <div class="nav-section-items">
+      <a class="nav-item active" data-section="home" onclick="showSection('home')">
+        <span class="nav-icon">&#127968;</span> Página Principal
+      </a>
+    </div>
   </div>
-  <div class="nav-section">
-    <div class="nav-section-title">Plataformas</div>
-    <a class="nav-item" data-section="avac" onclick="showSection('avac')">
-      <span class="nav-icon">&#128187;</span> Acceso al AVAC
-    </a>
-    <a class="nav-item" data-section="2fa" onclick="showSection('2fa')">
-      <span class="nav-icon">&#128274;</span> Activar 2FA
-    </a>
+  <div class="nav-section collapsed">
+    <div class="nav-section-title" onclick="toggleNav(this)">Plataformas</div>
+    <div class="nav-section-items">
+      <a class="nav-item" data-section="avac" onclick="showSection('avac')">
+        <span class="nav-icon">&#128187;</span> Acceso al AVAC
+      </a>
+      <a class="nav-item" data-section="2fa" onclick="showSection('2fa')">
+        <span class="nav-icon">&#128274;</span> Activar 2FA
+      </a>
+    </div>
   </div>
-  <div class="nav-section">
-    <div class="nav-section-title">Consultas Académicas</div>
-    <a class="nav-item" data-section="calificaciones" onclick="showSection('calificaciones')">
-      <span class="nav-icon">&#128203;</span> Ver Calificaciones
-    </a>
-    <a class="nav-item" data-section="record" onclick="showSection('record')">
-      <span class="nav-icon">&#128196;</span> Descargar Récord
-    </a>
-    <a class="nav-item" data-section="evaluacion" onclick="showSection('evaluacion')">
-      <span class="nav-icon">&#11088;</span> Evaluación Docente
-    </a>
+  <div class="nav-section collapsed">
+    <div class="nav-section-title" onclick="toggleNav(this)">Consultas Académicas</div>
+    <div class="nav-section-items">
+      <a class="nav-item" data-section="calificaciones" onclick="showSection('calificaciones')">
+        <span class="nav-icon">&#128203;</span> Ver Calificaciones
+      </a>
+      <a class="nav-item" data-section="record" onclick="showSection('record')">
+        <span class="nav-icon">&#128196;</span> Descargar Récord
+      </a>
+      <a class="nav-item" data-section="evaluacion" onclick="showSection('evaluacion')">
+        <span class="nav-icon">&#11088;</span> Evaluación Docente
+      </a>
+    </div>
   </div>
-  <div class="nav-section">
-    <div class="nav-section-title">Trámites</div>
-    <a class="nav-item" data-section="practica" onclick="showSection('practica')">
-      <span class="nav-icon">&#128221;</span> Solicitud de Práctica
-    </a>
-    <a class="nav-item" data-section="adicion" onclick="showSection('adicion')">
-      <span class="nav-icon">&#128209;</span> Adición de Créditos
-    </a>
-    <a class="nav-item" data-section="certificados" onclick="showSection('certificados')">
-      <span class="nav-icon">&#128196;</span> Certificados Electrónicos
-    </a>
+  <div class="nav-section collapsed">
+    <div class="nav-section-title" onclick="toggleNav(this)">Trámites</div>
+    <div class="nav-section-items">
+      <a class="nav-item" data-section="practica" onclick="showSection('practica')">
+        <span class="nav-icon">&#128221;</span> Solicitud de Práctica
+      </a>
+      <a class="nav-item" data-section="adicion" onclick="showSection('adicion')">
+        <span class="nav-icon">&#128209;</span> Adición de Créditos
+      </a>
+      <a class="nav-item" data-section="certificados" onclick="showSection('certificados')">
+        <span class="nav-icon">&#128196;</span> Certificados Electrónicos
+      </a>
+      <a class="nav-item" data-section="retiro" onclick="showSection('retiro')">
+        <span class="nav-icon">&#128220;</span> Retiro Académico
+      </a>
+    </div>
   </div>
-  <div class="nav-section">
-    <div class="nav-section-title">Finanzas</div>
-    <a class="nav-item" data-section="deudas" onclick="showSection('deudas')">
-      <span class="nav-icon">&#128176;</span> Revisar Deudas
-    </a>
-    <a class="nav-item" data-section="pagos" onclick="showSection('pagos')">
-      <span class="nav-icon">&#128179;</span> Canales de Pago
-    </a>
-    <a class="nav-item" data-section="becas" onclick="showSection('becas')">
-      <span class="nav-icon">&#127891;</span> Becas
-    </a>
+  <div class="nav-section collapsed">
+    <div class="nav-section-title" onclick="toggleNav(this)">Finanzas y Pagos</div>
+    <div class="nav-section-items">
+      <a class="nav-item" data-section="deudas" onclick="showSection('deudas')">
+        <span class="nav-icon">&#128176;</span> Revisar Deudas
+      </a>
+      <a class="nav-item" data-section="pagos" onclick="showSection('pagos')">
+        <span class="nav-icon">&#128179;</span> Canales de Pago
+      </a>
+      <a class="nav-item" data-section="pago-boton" onclick="showSection('pago-boton')">
+        <span class="nav-icon">&#128179;</span> Botón de Pagos UPS
+      </a>
+      <a class="nav-item" data-section="pago-pichincha" onclick="showSection('pago-pichincha')">
+        <span class="nav-icon">&#127974;</span> Pago Banca Pichincha
+      </a>
+      <a class="nav-item" data-section="pago-pichincha-app" onclick="showSection('pago-pichincha-app')">
+        <span class="nav-icon">&#128241;</span> Pago App Pichincha
+      </a>
+      <a class="nav-item" data-section="pago-pacifico" onclick="showSection('pago-pacifico')">
+        <span class="nav-icon">&#127974;</span> Pago Banco Pacífico
+      </a>
+      <a class="nav-item" data-section="becas" onclick="showSection('becas')">
+        <span class="nav-icon">&#127891;</span> Becas
+      </a>
+    </div>
   </div>
-  <div class="nav-section">
-    <div class="nav-section-title">Cuenta y Seguridad</div>
-    <a class="nav-item" data-section="contrasena" onclick="showSection('contrasena')">
-      <span class="nav-icon">&#128272;</span> Recuperar Contraseña
-    </a>
-    <a class="nav-item" data-section="correo" onclick="showSection('correo')">
-      <span class="nav-icon">&#9993;</span> Escribir un Correo
-    </a>
+  <div class="nav-section collapsed">
+    <div class="nav-section-title" onclick="toggleNav(this)">Cuenta y Seguridad</div>
+    <div class="nav-section-items">
+      <a class="nav-item" data-section="contrasena" onclick="showSection('contrasena')">
+        <span class="nav-icon">&#128272;</span> Recuperar Contraseña
+      </a>
+      <a class="nav-item" data-section="correo" onclick="showSection('correo')">
+        <span class="nav-icon">&#9993;</span> Escribir un Correo
+      </a>
+    </div>
   </div>
-  <div class="nav-section">
-    <div class="nav-section-title">Tutoriales en Video</div>
-    <a class="nav-item" data-section="carnet" onclick="showSection('carnet')">
-      <span class="nav-icon">&#127909;</span> Carnet Digital
-    </a>
+  <div class="nav-section collapsed">
+    <div class="nav-section-title" onclick="toggleNav(this)">Tutoriales en Video</div>
+    <div class="nav-section-items">
+      <a class="nav-item" data-section="carnet" onclick="showSection('carnet')">
+        <span class="nav-icon">&#127909;</span> Carnet Digital
+      </a>
+    </div>
   </div>
-  <div class="nav-section">
-    <div class="nav-section-title">Contacto</div>
-    <a class="nav-item" data-section="canales" onclick="showSection('canales')">
-      <span class="nav-icon">&#128222;</span> Canales de Comunicación
-    </a>
+  <div class="nav-section collapsed">
+    <div class="nav-section-title" onclick="toggleNav(this)">Contacto</div>
+    <div class="nav-section-items">
+      <a class="nav-item" data-section="canales" onclick="showSection('canales')">
+        <span class="nav-icon">&#128222;</span> Canales de Comunicación
+      </a>
+    </div>
   </div>
   <div class="nav-section">
     <div class="nav-section-title">Enlaces de Interés</div>
@@ -786,6 +817,180 @@
       <div class="tip-box"><strong>Nota:</strong> Espera la notificación de respuesta por parte de la universidad. El enlace directo para solicitudes es: <a href="https://portal.ups.edu.ec/estudiante-solicitud" target="_blank" rel="noopener">portal.ups.edu.ec/estudiante-solicitud</a></div>
     </div>
 
+
+    <!-- RETIRO ACADEMICO -->
+    <div class="section" id="sec-retiro">
+      <h2 class="section-title">Proceso de Retiro Académico</h2>
+      <p class="section-desc">El retiro académico se realiza cuando el estudiante ha cancelado algún rubro de su matrícula y no desea continuar con sus estudios.</p>
+
+      <div class="tip-box" style="border-left-color:#ef4444;"><strong>Importante:</strong> Si <strong>no has cancelado</strong> ningún rubro y no deseas continuar, solo debes solicitar la <strong>eliminación de tu prefactura</strong> a tu director de carrera.</div>
+
+      <div class="info-card" style="background:linear-gradient(135deg, #fff7ed 0%, #fef3c7 100%); border-left:4px solid var(--ups-gold);">
+        <h3>Se requieren dos solicitudes conjuntas</h3>
+        <p><strong>1.</strong> Solicitud de retiro de asignaturas para el nivel de grado</p>
+        <p><strong>2.</strong> Solicitud General para exoneración de deuda o devolución de valores</p>
+      </div>
+
+      <h3 style="margin:24px 0 12px; color:var(--ups-blue); font-size:17px;">Solicitud 1: Retiro de Asignaturas</h3>
+      <div class="info-card">
+        <p>Esta solicitud se puede realizar <strong>sin costo</strong> durante los <strong>primeros 30 días de clase</strong>. Después de ese plazo, deberás adquirir un derecho de <strong>$20 por cada asignatura matriculada</strong> y la solicitud se pondrá en consideración del consejo de carrera.</p>
+        <p style="margin-top:8px;">Para adquirir los derechos, realiza el pago y envía el comprobante a <a href="mailto:ssarmiento@ups.edu.ec">ssarmiento@ups.edu.ec</a></p>
+      </div>
+
+      <div class="step-card">
+        <div class="step-header"><div class="step-number">1</div><div class="step-title">Ingresar al Portal Institucional</div></div>
+        <p class="step-text">Ingresa a <a href="https://www.ups.edu.ec" target="_blank">www.ups.edu.ec</a> y da clic en <strong>Iniciar Sesión</strong>. Coloca tu correo institucional y contraseña.</p>
+      </div>
+      <div class="step-card">
+        <div class="step-header"><div class="step-number">2</div><div class="step-title">Ir a Sistema de Solicitudes</div></div>
+        <p class="step-text">En tu página personal, en el menú izquierdo, ingresa a <strong>Sistema de Solicitudes</strong> y da clic en <strong>Nueva Solicitud</strong>.</p>
+      </div>
+      <div class="step-card">
+        <div class="step-header"><div class="step-number">3</div><div class="step-title">Seleccionar Retiro de Asignaturas</div></div>
+        <p class="step-text">En Asuntos Académicos, selecciona <strong>"Solicitud de Retiro de Asignaturas para el Nivel de Grado"</strong> y da clic en continuar.</p>
+      </div>
+      <div class="step-card">
+        <div class="step-header"><div class="step-number">4</div><div class="step-title">Completar la solicitud</div></div>
+        <p class="step-text">Llena tus datos personales, usa <strong>"Agregar Asignatura"</strong> para añadir las asignaturas a retirar (encuentra el código y grupo en la sección <strong>Calificaciones</strong> de tu portal), escribe los motivos del retiro y da clic en <strong>Guardar Solicitud</strong>.</p>
+      </div>
+
+      <h3 style="margin:24px 0 12px; color:var(--ups-blue); font-size:17px;">Solicitud 2: Exoneración o Devolución</h3>
+      <div class="step-card">
+        <div class="step-header"><div class="step-number">5</div><div class="step-title">Crear Solicitud General</div></div>
+        <p class="step-text">En Sistema de Solicitudes, bajo <strong>Asuntos Administrativos</strong>, selecciona <strong>"Solicitud General"</strong> y da clic en continuar.</p>
+      </div>
+      <div class="step-card">
+        <div class="step-header"><div class="step-number">6</div><div class="step-title">Seleccionar destinatario</div></div>
+        <p class="step-text">Da clic en <strong>"Seleccionar Colaborador de la UPS"</strong> y busca al Vicerrector: <strong>Victor Fernando Moscoso Merchan</strong>.</p>
+      </div>
+      <div class="step-card">
+        <div class="step-header"><div class="step-number">7</div><div class="step-title">Redactar y enviar</div></div>
+        <p class="step-text">En el asunto coloca la petición de exoneración o devolución. En el contenido explica los motivos del retiro. Puedes adjuntar archivos de respaldo. Da clic en <strong>Guardar Solicitud</strong>.</p>
+      </div>
+
+      <div class="tip-box"><strong>Nota:</strong> Se cobrará un porcentaje por trámites administrativos. Da seguimiento a tus solicitudes ingresando al Sistema de Solicitudes en tu portal personal.</div>
+    </div>
+
+    <!-- BOTON DE PAGOS UPS -->
+    <div class="section" id="sec-pago-boton">
+      <h2 class="section-title">Botón de Pagos en Línea UPS</h2>
+      <p class="section-desc">Paga tu matrícula o cuotas directamente desde el portal web de la UPS con tarjeta de crédito o débito. Acepta: Diners Club, Discover, MasterCard, Visa y American Express.</p>
+      <div class="step-card">
+        <div class="step-header"><div class="step-number">1</div><div class="step-title">Ingresar al portal UPS</div></div>
+        <p class="step-text">Ingresa a <a href="https://www.ups.edu.ec/" target="_blank">www.ups.edu.ec</a> y da clic en el botón <strong>"Pagos en Línea"</strong>.</p>
+      </div>
+      <div class="step-card">
+        <div class="step-header"><div class="step-number">2</div><div class="step-title">Seleccionar tipo de usuario</div></div>
+        <p class="step-text">Da clic en <strong>"Estudiantes y Colaboradores"</strong>.</p>
+      </div>
+      <div class="step-card">
+        <div class="step-header"><div class="step-number">3</div><div class="step-title">Ver Pagos Pendientes</div></div>
+        <p class="step-text">Da clic en <strong>"Pagos Pendientes"</strong> en el menú lateral izquierdo.</p>
+      </div>
+      <div class="step-card">
+        <div class="step-header"><div class="step-number">4</div><div class="step-title">Seleccionar valor a pagar</div></div>
+        <p class="step-text">Selecciona el <strong>valor pendiente</strong> y da clic en <strong>"Continuar con el pago"</strong>.</p>
+      </div>
+      <div class="step-card">
+        <div class="step-header"><div class="step-number">5</div><div class="step-title">Aceptar términos y pagar</div></div>
+        <p class="step-text">Acepta <strong>Términos y Condiciones</strong>, selecciona <strong>Débito o Crédito</strong>, elige el tipo de tarjeta, llena los datos y da clic en <strong>Continuar</strong>. Coloca el código de seguridad que recibirás en tu teléfono o correo.</p>
+      </div>
+      <div class="tip-box"><strong>Recuerda:</strong> Archiva tus comprobantes de pago. No necesitas enviar el comprobante ya que el pago se procesa automáticamente en el sistema dentro de 24 horas.</div>
+    </div>
+
+    <!-- PAGO BANCA VIRTUAL PICHINCHA -->
+    <div class="section" id="sec-pago-pichincha">
+      <h2 class="section-title">Pago por Banca Virtual Banco Pichincha</h2>
+      <p class="section-desc">Paga tu matrícula o cuotas desde la banca web del Banco Pichincha.</p>
+      <div class="step-card">
+        <div class="step-header"><div class="step-number">1</div><div class="step-title">Ingresar a Banca Web</div></div>
+        <p class="step-text">Ingresa a <a href="https://bancaweb.pichincha.com/" target="_blank">bancaweb.pichincha.com</a> y digita tu <strong>usuario y contraseña</strong>.</p>
+      </div>
+      <div class="step-card">
+        <div class="step-header"><div class="step-number">2</div><div class="step-title">Código de seguridad</div></div>
+        <p class="step-text">Ingresa el <strong>código de seguridad</strong> de 6 dígitos que recibirás en tu correo o teléfono.</p>
+      </div>
+      <div class="step-card">
+        <div class="step-header"><div class="step-number">3</div><div class="step-title">Ir a Pagos</div></div>
+        <p class="step-text">Selecciona la opción <strong>Pagos > Servicios-Facturas</strong>.</p>
+      </div>
+      <div class="step-card">
+        <div class="step-header"><div class="step-number">4</div><div class="step-title">Buscar la UPS</div></div>
+        <p class="step-text">Digita <strong>"Universidad Politécnica Salesiana"</strong> y escoge la <strong>sede correspondiente</strong> (Cuenca, Guayaquil o Quito).</p>
+      </div>
+      <div class="step-card">
+        <div class="step-header"><div class="step-number">5</div><div class="step-title">Datos del pago</div></div>
+        <p class="step-text">En <strong>Contrapartida</strong> coloca tu <strong>número de cédula</strong>. En <strong>Descripción</strong> indica el motivo del pago (ej: "pensión").</p>
+      </div>
+      <div class="step-card">
+        <div class="step-header"><div class="step-number">6</div><div class="step-title">Confirmar y pagar</div></div>
+        <p class="step-text">Realiza el pago y verifica el proceso de éxito de la transacción.</p>
+      </div>
+      <div class="tip-box"><strong>Recuerda:</strong> Archiva tus comprobantes de pago. No necesitas enviar el comprobante ya que el pago se procesa automáticamente dentro de 24 horas.</div>
+    </div>
+
+    <!-- PAGO APP BANCO PICHINCHA -->
+    <div class="section" id="sec-pago-pichincha-app">
+      <h2 class="section-title">Pago por App Banco Pichincha</h2>
+      <p class="section-desc">Paga tu matrícula o cuotas desde la aplicación móvil "Banca Móvil" del Banco Pichincha.</p>
+      <div class="step-card">
+        <div class="step-header"><div class="step-number">1</div><div class="step-title">Abrir la app</div></div>
+        <p class="step-text">Ingresa a la aplicación <strong>"Banca Móvil"</strong> del Banco Pichincha e ingresa tu <strong>clave y contraseña</strong>.</p>
+      </div>
+      <div class="step-card">
+        <div class="step-header"><div class="step-number">2</div><div class="step-title">Ir a Pagar Servicios</div></div>
+        <p class="step-text">En Operaciones, selecciona <strong>"Pagar Servicios"</strong>.</p>
+      </div>
+      <div class="step-card">
+        <div class="step-header"><div class="step-number">3</div><div class="step-title">Seleccionar categoría</div></div>
+        <p class="step-text">Da clic en <strong>Educación</strong> y luego en <strong>Universidad</strong>.</p>
+      </div>
+      <div class="step-card">
+        <div class="step-header"><div class="step-number">4</div><div class="step-title">Elegir sede UPS</div></div>
+        <p class="step-text">Selecciona tu sede: <strong>Universidad Politécnica Salesiana Guayaquil, Quito o Cuenca</strong>.</p>
+      </div>
+      <div class="step-card">
+        <div class="step-header"><div class="step-number">5</div><div class="step-title">Datos del pago</div></div>
+        <p class="step-text">En <strong>Contrapartida</strong> coloca el <strong>número de cédula</strong> del estudiante. En <strong>Descripción</strong> coloca el motivo de pago.</p>
+      </div>
+      <div class="step-card">
+        <div class="step-header"><div class="step-number">6</div><div class="step-title">Confirmar y pagar</div></div>
+        <p class="step-text">Verifica el <strong>valor a cancelar</strong> y da clic en <strong>"Realizar Pago"</strong>.</p>
+      </div>
+      <div class="tip-box"><strong>Recuerda:</strong> Archiva tus comprobantes. El pago se procesa automáticamente dentro de 24 horas.</div>
+    </div>
+
+    <!-- PAGO BANCO PACIFICO -->
+    <div class="section" id="sec-pago-pacifico">
+      <h2 class="section-title">Pago por Banca Virtual Banco del Pacífico</h2>
+      <p class="section-desc">Paga tu matrícula o cuotas desde el Intermático del Banco del Pacífico.</p>
+      <div class="step-card">
+        <div class="step-header"><div class="step-number">1</div><div class="step-title">Ingresar al Intermático</div></div>
+        <p class="step-text">Ingresa a <a href="https://www.intermatico.com/" target="_blank">www.intermatico.com</a> y da clic en <strong>"Banca Virtual Personas"</strong>.</p>
+      </div>
+      <div class="step-card">
+        <div class="step-header"><div class="step-number">2</div><div class="step-title">Iniciar sesión</div></div>
+        <p class="step-text">Ingresa con tu <strong>usuario y contraseña</strong> del Banco del Pacífico.</p>
+      </div>
+      <div class="step-card">
+        <div class="step-header"><div class="step-number">3</div><div class="step-title">Ir a Pagos</div></div>
+        <p class="step-text">Da clic en <strong>Pagos y recargas</strong> e ingresa en <strong>Pago a Instituciones</strong>.</p>
+      </div>
+      <div class="step-card">
+        <div class="step-header"><div class="step-number">4</div><div class="step-title">Seleccionar institución</div></div>
+        <p class="step-text">Selecciona tipo <strong>"Centros Educativos"</strong>, busca <strong>"UPS"</strong> y selecciona la sede a la que perteneces.</p>
+      </div>
+      <div class="step-card">
+        <div class="step-header"><div class="step-number">5</div><div class="step-title">Ingresar cédula</div></div>
+        <p class="step-text">En el campo <strong>Código</strong> ingresa el <strong>número de cédula del estudiante</strong>.</p>
+      </div>
+      <div class="step-card">
+        <div class="step-header"><div class="step-number">6</div><div class="step-title">Confirmar y pagar</div></div>
+        <p class="step-text">Confirma los <strong>valores a cancelar</strong> y procesa el pago. El sistema debitará de tu cuenta.</p>
+      </div>
+      <div class="tip-box"><strong>Recuerda:</strong> Archiva tus comprobantes. El pago se procesa automáticamente dentro de 24 horas.</div>
+    </div>
+
     <div class="section" id="sec-canales">
       <h2 class="section-title">Contacto</h2>
       <p class="section-desc">Canales oficiales de comunicación de la Universidad Politécnica Salesiana.</p>
@@ -821,12 +1026,22 @@
 </div>
 
 <script>
+function toggleNav(el) {
+  el.parentElement.classList.toggle('collapsed');
+}
+
 function showSection(id) {
   document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
   document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
   document.getElementById('sec-' + id).classList.add('active');
   var navItem = document.querySelector('[data-section="' + id + '"]');
   if (navItem) navItem.classList.add('active');
+  // Auto-expand the parent nav-section
+  if (navItem) {
+    var parentSection = navItem.closest('.nav-section');
+    if (parentSection) parentSection.classList.remove('collapsed');
+  }
+
   var titles = {
     home: 'Inicio', avac: 'Acceso al AVAC', calificaciones: 'Calificaciones',
     contrasena: 'Recuperar Contrase\u00f1a', deudas: 'Deudas Pendientes',
@@ -834,7 +1049,8 @@ function showSection(id) {
     practica: 'Solicitud de Pr\u00e1ctica', adicion: 'Adici\u00f3n de Cr\u00e9ditos',
     correo: 'Escribir un Correo', '2fa': 'Activar 2FA',
     carnet: 'Carnet Digital', canales: 'Canales de Comunicaci\u00f3n',
-    certificados: 'Certificados Electr\u00f3nicos', pagos: 'Canales de Pago', becas: 'Becas'
+    certificados: 'Certificados Electr\u00f3nicos', pagos: 'Canales de Pago', becas: 'Becas',
+    retiro: 'Retiro Acad\u00e9mico', 'pago-boton': 'Bot\u00f3n de Pagos', 'pago-pichincha': 'Pago Banco Pichincha', 'pago-pichincha-app': 'Pago App Pichincha', 'pago-pacifico': 'Pago Banco del Pac\u00edfico'
   };
   document.getElementById('breadcrumb').textContent = titles[id] || id;
   document.getElementById('sidebar').classList.remove('open');
