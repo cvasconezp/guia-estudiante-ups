@@ -17,6 +17,7 @@
     --sidebar-width: 280px;
   }
   * { margin:0; padding:0; box-sizing:border-box; }
+  html { scroll-behavior: smooth; }
   body { font-family: 'Gill Sans', 'Gill Sans MT', 'Trebuchet MS', Calibri, sans-serif; color: var(--text-dark); background: var(--bg-light); }
 
   /* SIDEBAR */
@@ -25,13 +26,9 @@
     background: linear-gradient(180deg, #001e3f 0%, var(--ups-blue) 50%, var(--ups-blue-light) 100%);
     color: #fff; overflow-y: auto; z-index: 100; transition: transform .3s;
   }
-  .sidebar-header {
-    padding: 24px 20px 16px; text-align: center;
-    border-bottom: 2px solid var(--ups-gold);
-  }
-  .sidebar-header h2 { font-size: 15px; font-weight: 600; letter-spacing: .5px; margin-bottom: 4px; color: var(--ups-gold-light); }
-  .sidebar-header h3 { font-size: 12px; font-weight: 400; opacity: .8; }
-  .sidebar-logo { font-size: 22px; font-weight: 700; margin-bottom: 6px; letter-spacing: 1px; }
+  .sidebar-header { padding: 20px 16px 12px; text-align: center; }
+  .sidebar-logo-img { width: 88%; max-width: 230px; height: auto; transition: opacity .2s; }
+  .sidebar-logo-img:hover { opacity: .85; }
 
   .nav-section { padding: 4px 0; border-bottom: 1px solid rgba(255,255,255,.08); }
   .nav-section-title {
@@ -169,6 +166,24 @@
   .home-card h3 { font-size: 14.5px; color: var(--ups-blue); margin-bottom: 6px; }
   .home-card p { font-size: 12.5px; color: #888; }
 
+
+  /* HOME CATEGORIES */
+  .home-categories { margin-top: 8px; }
+  .home-cat { margin-bottom: 28px; }
+  .home-cat-title {
+    font-size: 16px; font-weight: 700; color: var(--ups-blue);
+    margin-bottom: 14px; padding-bottom: 8px;
+    border-bottom: 2px solid var(--ups-gold);
+    display: inline-block;
+  }
+  .home-card.hidden { display: none; }
+  .home-cat.hidden { display: none; }
+  .no-results {
+    text-align: center; padding: 40px 20px; color: #999;
+    font-size: 15px; display: none;
+  }
+  .no-results.show { display: block; }
+  #homeSearch:focus { box-shadow: 0 4px 20px rgba(0,0,0,.2), 0 0 0 3px rgba(218,170,0,.4); }
   /* RESPONSIVE */
   @media (min-width: 1400px) {
     .content { padding: 36px 56px; }
@@ -220,17 +235,10 @@
 <!-- SIDEBAR -->
 <nav class="sidebar" id="sidebar">
   <div class="sidebar-header">
-    <img src="logo-ups-white.svg" alt="Universidad Politécnica Salesiana" class="sidebar-logo-img">
+    <img src="logo-ups-white.svg" alt="Universidad Politécnica Salesiana" class="sidebar-logo-img" onclick="showSection('home')" style="cursor:pointer;" title="Ir al inicio">
   </div>
-  <div class="sidebar-subtitle">Guía del Estudiante</div>
-  <div class="nav-section">
-    <div class="nav-section-title" onclick="toggleNav(this)">Inicio</div>
-    <div class="nav-section-items">
-      <a class="nav-item active" data-section="home" onclick="showSection('home')">
-        <span class="nav-icon">&#127968;</span> Página Principal
-      </a>
-    </div>
-  </div>
+  <div class="sidebar-subtitle" onclick="showSection('home')" style="cursor:pointer;" title="Ir al inicio">Guía del Estudiante</div>
+
   <div class="nav-section collapsed">
     <div class="nav-section-title" onclick="toggleNav(this)">Plataformas</div>
     <div class="nav-section-items">
@@ -371,70 +379,151 @@
     <!-- HOME -->
     <div class="section active" id="sec-home">
       <div class="hero">
-        <img src="logo-ups-white.svg" alt="UPS" style="height:40px; margin-bottom:16px; position:relative; z-index:1; opacity:.95;">
+        <img src="logo-ups-white.svg" alt="UPS" style="height:44px; margin-bottom:16px; position:relative; z-index:1; opacity:.95;">
         <h1>Guía del Estudiante</h1>
-        <p>Modalidad En Línea<br>
-        Aquí encontrarás tutoriales paso a paso para realizar tus trámites académicos, consultar información y resolver problemas comunes.</p>
-      </div>
-      <h2 style="font-size:18px; color:var(--ups-blue); margin-bottom: 4px;">Accesos rápidos</h2>
-      <p style="font-size:13px; color:#888; margin-bottom:16px;">Selecciona un tema para ver el tutorial completo</p>
-      <div class="home-grid">
-        <div class="home-card" onclick="showSection('avac')">
-          <div class="card-icon">&#128187;</div>
-          <h3>Acceso al AVAC</h3>
-          <p>Ingresa a tus aulas virtuales</p>
-        </div>
-        <div class="home-card" onclick="showSection('calificaciones')">
-          <div class="card-icon">&#128203;</div>
-          <h3>Ver Calificaciones</h3>
-          <p>Consulta tus notas por asignatura</p>
-        </div>
-        <div class="home-card" onclick="showSection('contrasena')">
-          <div class="card-icon">&#128272;</div>
-          <h3>Recuperar Contraseña</h3>
-          <p>Restablece tu clave de acceso</p>
-        </div>
-        <div class="home-card" onclick="showSection('deudas')">
-          <div class="card-icon">&#128176;</div>
-          <h3>Revisar Deudas</h3>
-          <p>Consulta tu estado de cuenta</p>
-        </div>
-        <div class="home-card" onclick="showSection('evaluacion')">
-          <div class="card-icon">&#11088;</div>
-          <h3>Evaluación Docente</h3>
-          <p>Evalúa a tus profesores</p>
-        </div>
-        <div class="home-card" onclick="showSection('record')">
-          <div class="card-icon">&#128196;</div>
-          <h3>Descargar Récord</h3>
-          <p>Obtén tu récord académico en PDF</p>
-        </div>
-        <div class="home-card" onclick="showSection('practica')">
-          <div class="card-icon">&#128221;</div>
-          <h3>Solicitud de Práctica</h3>
-          <p>Trámite de asignación de práctica</p>
-        </div>
-        <div class="home-card" onclick="showSection('correo')">
-          <div class="card-icon">&#9993;</div>
-          <h3>Escribir un Correo</h3>
-          <p>Cómo redactar un correo formal</p>
-        </div>
-        <div class="home-card" onclick="showSection('2fa')">
-          <div class="card-icon">&#128274;</div>
-          <h3>Activar 2FA</h3>
-          <p>Seguridad de doble factor</p>
-        </div>
-        <div class="home-card" onclick="showSection('carnet')">
-          <div class="card-icon">&#127909;</div>
-          <h3>Carnet Digital</h3>
-          <p>Tutorial en video</p>
-        </div>
-        <div class="home-card" onclick="showSection('canales')">
-          <div class="card-icon">&#128222;</div>
-          <h3>Canales de Comunicación</h3>
-          <p>Contactos oficiales</p>
+        <p style="max-width:560px;">Modalidad En Línea — Tutoriales paso a paso para gestionar tus trámites académicos, consultas y servicios universitarios.</p>
+        <div class="hero-search" style="position:relative; z-index:1; margin-top:20px; max-width:480px;">
+          <input type="text" id="homeSearch" placeholder="Buscar tutorial... (ej: calificaciones, deudas, inglés)" oninput="filterHome(this.value)" style="width:100%; padding:14px 20px 14px 44px; border:none; border-radius:50px; font-size:14px; box-shadow:0 4px 20px rgba(0,0,0,.2); outline:none; font-family:inherit;">
+          <span style="position:absolute; left:16px; top:50%; transform:translateY(-50%); font-size:18px; opacity:.4;">&#128269;</span>
         </div>
       </div>
+
+      <!-- CATEGORÍAS -->
+      <div class="home-categories">
+
+        <div class="home-cat">
+          <h3 class="home-cat-title">&#128218; Plataformas y Acceso</h3>
+          <div class="home-grid">
+            <div class="home-card" data-keywords="avac aula virtual plataforma moodle" onclick="showSection('avac')">
+              <div class="card-icon">&#128187;</div>
+              <h3>Acceso al AVAC</h3>
+              <p>Ingresa a tus aulas virtuales</p>
+            </div>
+            <div class="home-card" data-keywords="contraseña clave password recuperar" onclick="showSection('contrasena')">
+              <div class="card-icon">&#128272;</div>
+              <h3>Recuperar Contraseña</h3>
+              <p>Restablece tu clave de acceso</p>
+            </div>
+            <div class="home-card" data-keywords="2fa doble factor seguridad autenticación" onclick="showSection('2fa')">
+              <div class="card-icon">&#128274;</div>
+              <h3>Activar 2FA</h3>
+              <p>Seguridad de doble factor</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="home-cat">
+          <h3 class="home-cat-title">&#127891; Consultas Académicas</h3>
+          <div class="home-grid">
+            <div class="home-card" data-keywords="calificaciones notas asignatura parcial" onclick="showSection('calificaciones')">
+              <div class="card-icon">&#128203;</div>
+              <h3>Ver Calificaciones</h3>
+              <p>Consulta tus notas por asignatura</p>
+            </div>
+            <div class="home-card" data-keywords="récord académico historial pdf" onclick="showSection('record')">
+              <div class="card-icon">&#128196;</div>
+              <h3>Descargar Récord</h3>
+              <p>Obtén tu récord académico en PDF</p>
+            </div>
+            <div class="home-card" data-keywords="evaluación docente profesor" onclick="showSection('evaluacion')">
+              <div class="card-icon">&#11088;</div>
+              <h3>Evaluación Docente</h3>
+              <p>Evalúa a tus profesores</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="home-cat">
+          <h3 class="home-cat-title">&#128221; Trámites</h3>
+          <div class="home-grid">
+            <div class="home-card" data-keywords="práctica solicitud asignación preprofesional" onclick="showSection('practica')">
+              <div class="card-icon">&#128221;</div>
+              <h3>Solicitud de Práctica</h3>
+              <p>Trámite de asignación de práctica</p>
+            </div>
+            <div class="home-card" data-keywords="certificado electrónico documento" onclick="showSection('certificados')">
+              <div class="card-icon">&#128196;</div>
+              <h3>Certificados Electrónicos</h3>
+              <p>Solicita certificados en línea</p>
+            </div>
+            <div class="home-card" data-keywords="retiro académico anulación materias" onclick="showSection('retiro')">
+              <div class="card-icon">&#128220;</div>
+              <h3>Retiro Académico</h3>
+              <p>Proceso de retiro de materias</p>
+            </div>
+            <div class="home-card" data-keywords="adición créditos materias extra" onclick="showSection('adicion')">
+              <div class="card-icon">&#10133;</div>
+              <h3>Adición de Créditos</h3>
+              <p>Solicita créditos adicionales</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="home-cat">
+          <h3 class="home-cat-title">&#127463;&#127466; Idiomas</h3>
+          <div class="home-grid">
+            <div class="home-card" data-keywords="inglés examen ubicación suficiencia idioma" onclick="showSection('idiomas')">
+              <div class="card-icon">&#127463;&#127466;</div>
+              <h3>Exámenes de Inglés</h3>
+              <p>Calendario, costos y tipos de examen</p>
+            </div>
+            <div class="home-card" data-keywords="cest cambridge reading writing speaking listening" onclick="showSection('idiomas-cest')">
+              <div class="card-icon">&#128221;</div>
+              <h3>Info CEST Cambridge</h3>
+              <p>Descripción y práctica del examen</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="home-cat">
+          <h3 class="home-cat-title">&#128176; Finanzas y Pagos</h3>
+          <div class="home-grid">
+            <div class="home-card" data-keywords="deudas estado cuenta pendiente" onclick="showSection('deudas')">
+              <div class="card-icon">&#128176;</div>
+              <h3>Revisar Deudas</h3>
+              <p>Consulta tu estado de cuenta</p>
+            </div>
+            <div class="home-card" data-keywords="pago botón pagos tarjeta" onclick="showSection('pago-boton')">
+              <div class="card-icon">&#128179;</div>
+              <h3>Botón de Pagos</h3>
+              <p>Paga en línea con tarjeta</p>
+            </div>
+            <div class="home-card" data-keywords="pago pichincha banco transferencia" onclick="showSection('pago-pichincha')">
+              <div class="card-icon">&#127974;</div>
+              <h3>Pago Bco. Pichincha</h3>
+              <p>Banca web y ventanilla</p>
+            </div>
+            <div class="home-card" data-keywords="becas beca socioeconómica académica" onclick="showSection('becas')">
+              <div class="card-icon">&#127891;</div>
+              <h3>Becas</h3>
+              <p>Tipos de becas disponibles</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="home-cat">
+          <h3 class="home-cat-title">&#128231; Comunicación</h3>
+          <div class="home-grid">
+            <div class="home-card" data-keywords="correo email formal institucional" onclick="showSection('correo')">
+              <div class="card-icon">&#9993;</div>
+              <h3>Escribir un Correo</h3>
+              <p>Cómo redactar un correo formal</p>
+            </div>
+            <div class="home-card" data-keywords="carnet digital credencial estudiantil" onclick="showSection('carnet')">
+              <div class="card-icon">&#127909;</div>
+              <h3>Carnet Digital</h3>
+              <p>Tutorial en video</p>
+            </div>
+            <div class="home-card" data-keywords="contacto canales teléfono soporte" onclick="showSection('canales')">
+              <div class="card-icon">&#128222;</div>
+              <h3>Canales de Comunicación</h3>
+              <p>Contactos oficiales</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+      <div class="no-results" id="noResults">No se encontraron tutoriales. Intenta con otro término.</div>
     </div>
 
     <!-- AVAC -->
@@ -1291,6 +1380,41 @@ function trackEvent(section, action) {
 document.addEventListener('DOMContentLoaded', function() {
   trackEvent('home', 'pageload');
 });
+
+function filterHome(query) {
+  query = query.toLowerCase().trim();
+  var cats = document.querySelectorAll('.home-cat');
+  var noResults = document.getElementById('noResults');
+  var anyVisible = false;
+
+  cats.forEach(function(cat) {
+    var cards = cat.querySelectorAll('.home-card');
+    var catVisible = false;
+    cards.forEach(function(card) {
+      var text = (card.textContent + ' ' + (card.getAttribute('data-keywords') || '')).toLowerCase();
+      if (!query || text.indexOf(query) !== -1) {
+        card.classList.remove('hidden');
+        catVisible = true;
+      } else {
+        card.classList.add('hidden');
+      }
+    });
+    if (catVisible) {
+      cat.classList.remove('hidden');
+      anyVisible = true;
+    } else {
+      cat.classList.add('hidden');
+    }
+  });
+
+  if (noResults) {
+    if (!anyVisible && query) {
+      noResults.classList.add('show');
+    } else {
+      noResults.classList.remove('show');
+    }
+  }
+}
 </script>
 </body>
 </html>
