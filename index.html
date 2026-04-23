@@ -1208,7 +1208,18 @@
 
 <script>
 function toggleNav(el) {
-  el.parentElement.classList.toggle('collapsed');
+  var section = el.parentElement;
+  var isOpening = section.classList.contains('collapsed');
+  // Cerrar todas las demás secciones
+  if (isOpening) {
+    var allSections = document.querySelectorAll('.nav-section:not(.no-toggle)');
+    for (var i = 0; i < allSections.length; i++) {
+      if (allSections[i] !== section) {
+        allSections[i].classList.add('collapsed');
+      }
+    }
+  }
+  section.classList.toggle('collapsed');
 }
 
 function showSection(id) {
