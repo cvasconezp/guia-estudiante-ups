@@ -1356,6 +1356,12 @@ function showSection(id) {
     idiomas: 'Ex\u00e1menes de Ingl\u00e9s', 'idiomas-cest': 'Informaci\u00f3n CEST Cambridge'
   };
   document.getElementById('breadcrumb').textContent = titles[id] || id;
+  // Update URL
+  if (id === 'home') {
+    history.pushState({section: id}, '', '/');
+  } else {
+    history.pushState({section: id}, '', '/' + id);
+  }
   document.getElementById('sidebar').classList.remove('open');
   document.getElementById('overlay').classList.remove('open');
   window.scrollTo(0, 0);
@@ -1436,6 +1442,44 @@ function filterHome(query) {
     }
   }
 }
+
+// URL routing - load section from URL path
+window.addEventListener('popstate', function(e) {
+  if (e.state && e.state.section) {
+    showSectionNoHistory(e.state.section);
+  }
+});
+
+function showSectionNoHistory(id) {
+  var sections = document.querySelectorAll('.section');
+  for (var i = 0; i < sections.length; i++) sections[i].classList.remove('active');
+  var target = document.getElementById('sec-' + id);
+  if (target) target.classList.add('active');
+  var navItems = document.querySelectorAll('.nav-item');
+  for (var i = 0; i < navItems.length; i++) {
+    navItems[i].classList.toggle('active', navItems[i].getAttribute('data-section') === id);
+  }
+  var titles = document.getElementById('breadcrumb');
+  if (titles) titles.textContent = id;
+  var navItem = document.querySelector('.nav-item[data-section="' + id + '"]');
+  if (navItem) {
+    var parentSection = navItem.closest('.nav-section');
+    if (parentSection) parentSection.classList.remove('collapsed');
+  }
+  window.scrollTo(0, 0);
+}
+
+// On page load, check URL
+(function() {
+  var path = window.location.pathname.replace(/^\//, '');
+  if (path && path !== 'admin') {
+    var el = document.getElementById('sec-' + path);
+    if (el) {
+      showSection(path);
+      history.replaceState({section: path}, '', '/' + path);
+    }
+  }
+})();
 </script>
 </body>
 </html>

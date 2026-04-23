@@ -42,6 +42,10 @@
     {
       "src": "/admin",
       "dest": "/admin.html"
+    },
+    {
+      "src": "/((?!api|admin|.*\\..*).*)",
+      "dest": "/index.html"
     }
   ]
 }
