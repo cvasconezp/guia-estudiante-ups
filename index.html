@@ -6,10 +6,10 @@
 <title>Guía del Estudiante - UPS En Línea</title>
 <style>
   :root {
-    --ups-blue: #003366;
-    --ups-blue-light: #1a5276;
-    --ups-gold: #d4a017;
-    --ups-gold-light: #f0c040;
+    --ups-blue: #002856;
+    --ups-blue-light: #003d7a;
+    --ups-gold: #DAAA00;
+    --ups-gold-light: #F2C94C;
     --bg-light: #f5f7fa;
     --text-dark: #2c3e50;
     --text-medium: #555;
@@ -17,12 +17,12 @@
     --sidebar-width: 280px;
   }
   * { margin:0; padding:0; box-sizing:border-box; }
-  body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; color: var(--text-dark); background: var(--bg-light); }
+  body { font-family: 'Gill Sans', 'Gill Sans MT', 'Trebuchet MS', Calibri, sans-serif; color: var(--text-dark); background: var(--bg-light); }
 
   /* SIDEBAR */
   .sidebar {
     position: fixed; top:0; left:0; width: var(--sidebar-width); height:100vh;
-    background: linear-gradient(180deg, var(--ups-blue) 0%, var(--ups-blue-light) 100%);
+    background: linear-gradient(180deg, #001e3f 0%, var(--ups-blue) 50%, var(--ups-blue-light) 100%);
     color: #fff; overflow-y: auto; z-index: 100; transition: transform .3s;
   }
   .sidebar-header {
@@ -70,7 +70,8 @@
     display: flex; align-items: center; justify-content: space-between;
     position: sticky; top:0; z-index: 50;
   }
-  .top-bar h1 { font-size: 18px; color: var(--ups-blue); }
+  .topbar-logo { height: 28px; width: auto; display: none; }
+  .top-bar h1 { font-size: 18px; color: var(--ups-blue); font-weight: 700; letter-spacing: .3px; }
   .top-bar .breadcrumb { font-size: 12px; color: #999; }
   .hamburger { display: none; font-size: 24px; cursor: pointer; background: none; border: none; color: var(--ups-blue); }
 
@@ -78,7 +79,7 @@
 
   /* HERO */
   .hero {
-    background: linear-gradient(135deg, var(--ups-blue), var(--ups-blue-light));
+    background: linear-gradient(135deg, var(--ups-blue), #004080);
     color: #fff; padding: 48px 40px; border-radius: 16px; margin-bottom: 32px;
     position: relative; overflow: hidden;
   }
@@ -106,7 +107,7 @@
   .step-header { display: flex; align-items: center; gap: 14px; margin-bottom: 12px; }
   .step-number {
     width: 36px; height: 36px; border-radius: 50%;
-    background: linear-gradient(135deg, var(--ups-blue), var(--ups-blue-light));
+    background: linear-gradient(135deg, var(--ups-blue), #004080);
     color: #fff; display: flex; align-items: center; justify-content: center;
     font-weight: 700; font-size: 15px; flex-shrink: 0;
   }
@@ -181,6 +182,7 @@
     .sidebar.open { transform: translateX(0); }
     .main { margin-left: 0; }
     .hamburger { display: block; }
+    .topbar-logo { display: block; }
     .content { padding: 16px; }
     .hero { padding: 32px 24px; }
     .hero h1 { font-size: 22px; }
@@ -218,10 +220,9 @@
 <!-- SIDEBAR -->
 <nav class="sidebar" id="sidebar">
   <div class="sidebar-header">
-    <div class="sidebar-logo">UPS</div>
-    <h2>Modalidad En Línea</h2>
-    <h3>Guía del Estudiante</h3>
+    <img src="logo-ups-white.svg" alt="Universidad Politécnica Salesiana" class="sidebar-logo-img">
   </div>
+  <div class="sidebar-subtitle">Guía del Estudiante</div>
   <div class="nav-section">
     <div class="nav-section-title" onclick="toggleNav(this)">Inicio</div>
     <div class="nav-section-items">
@@ -359,9 +360,10 @@
     <!-- HOME -->
     <div class="section active" id="sec-home">
       <div class="hero">
-        <h1>Bienvenido a la Guía del Estudiante</h1>
-        <p>Universidad Politécnica Salesiana - Modalidad En Línea<br>
-        Aqui encontrarás tutoriales paso a paso para realizar tus trámites académicos, consultar información y resolver problemas comunes.</p>
+        <img src="logo-ups-white.svg" alt="UPS" style="height:40px; margin-bottom:16px; position:relative; z-index:1; opacity:.95;">
+        <h1>Guía del Estudiante</h1>
+        <p>Modalidad En Línea<br>
+        Aquí encontrarás tutoriales paso a paso para realizar tus trámites académicos, consultar información y resolver problemas comunes.</p>
       </div>
       <h2 style="font-size:18px; color:var(--ups-blue); margin-bottom: 4px;">Accesos rápidos</h2>
       <p style="font-size:13px; color:#888; margin-bottom:16px;">Selecciona un tema para ver el tutorial completo</p>
