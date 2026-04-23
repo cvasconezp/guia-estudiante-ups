@@ -1,16 +1,47 @@
 {
   "version": 2,
   "builds": [
-    { "src": "api/*.js", "use": "@vercel/node" },
-    { "src": "index.html", "use": "@vercel/static" },
-    { "src": "admin.html", "use": "@vercel/static" },
-    { "src": "carnet-digital.mp4", "use": "@vercel/static" },
-    { "src": "**/*.jpg", "use": "@vercel/static" },
-    { "src": "**/*.png", "use": "@vercel/static" }
+    {
+      "src": "api/*.js",
+      "use": "@vercel/node"
+    },
+    {
+      "src": "index.html",
+      "use": "@vercel/static"
+    },
+    {
+      "src": "admin.html",
+      "use": "@vercel/static"
+    },
+    {
+      "src": "carnet-digital.mp4",
+      "use": "@vercel/static"
+    },
+    {
+      "src": "**/*.jpg",
+      "use": "@vercel/static"
+    },
+    {
+      "src": "**/*.png",
+      "use": "@vercel/static"
+    },
+    {
+      "src": "**/*.svg",
+      "use": "@vercel/static"
+    }
   ],
   "routes": [
-    { "src": "/api/track", "dest": "/api/track.js" },
-    { "src": "/api/stats", "dest": "/api/stats.js" },
-    { "src": "/admin", "dest": "/admin.html" }
+    {
+      "src": "/api/track",
+      "dest": "/api/track.js"
+    },
+    {
+      "src": "/api/stats",
+      "dest": "/api/stats.js"
+    },
+    {
+      "src": "/admin",
+      "dest": "/admin.html"
+    }
   ]
 }
