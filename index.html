@@ -306,6 +306,15 @@
     </div>
   </div>
   <div class="nav-section collapsed">
+    <div class="nav-section-title" onclick="toggleNav(this)">Bienestar Estudiantil</div>
+    <div class="nav-section-items">
+      <a class="nav-item" data-section="seguro" onclick="showSection('seguro')">
+        <span class="nav-icon">&#128657;</span> Seguro contra Accidentes
+      </a>
+    </div>
+  </div>
+
+  <div class="nav-section collapsed">
     <div class="nav-section-title" onclick="toggleNav(this)">Finanzas y Pagos</div>
     <div class="nav-section-items">
       <a class="nav-item" data-section="deudas" onclick="showSection('deudas')">
@@ -486,6 +495,17 @@
               <div class="card-icon">&#128221;</div>
               <h3>Info CEST Cambridge</h3>
               <p>Descripción y práctica del examen</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="home-cat">
+          <h3 class="home-cat-title">&#128657; Bienestar Estudiantil</h3>
+          <div class="home-grid">
+            <div class="home-card" data-keywords="seguro accidente clínica hospital reembolso crédito hospitalario" onclick="showSection('seguro')">
+              <div class="card-icon">&#128657;</div>
+              <h3>Seguro contra Accidentes</h3>
+              <p>Cobertura, clínicas y proceso de reembolso</p>
             </div>
           </div>
         </div>
@@ -1303,6 +1323,280 @@
           </div>
         </div>
       </div>
+
+    <!-- SEGURO CONTRA ACCIDENTES -->
+    <div class="section" id="sec-seguro">
+      <h2 class="section-title">Seguro contra Accidentes</h2>
+      <p class="section-desc">Todos los estudiantes de la UPS cuentan con un seguro contra accidentes a través de <strong>Seguros del Pichincha</strong> (CONFIMED). Este seguro cubre accidentes que ocurran dentro o fuera de la universidad.</p>
+
+      <div class="info-card" style="background: linear-gradient(135deg, #e8f4f8 0%, #f0f7fa 100%); border-left: 4px solid var(--ups-blue);">
+        <h3>&#128222; Línea de atención CONFIMED</h3>
+        <p style="font-size: 22px; font-weight: bold; margin: 8px 0;">1700 30 30 30</p>
+        <p>Llama para solicitar el servicio de red hospitalaria (Crédito Hospitalario).</p>
+      </div>
+
+      <div class="info-card">
+        <h3>&#127973; Opción 1: Crédito Hospitalario</h3>
+        <p>Es la forma más rápida de acceder al seguro. Acudes directamente a una clínica de la red de convenio.</p>
+        <div class="step-card">
+          <div class="step-header"><div class="step-number">1</div><div class="step-title">Llama al 1700 30 30 30</div></div>
+          <p>Comunícate con CONFIMED para solicitar el crédito hospitalario.</p>
+        </div>
+        <div class="step-card">
+          <div class="step-header"><div class="step-number">2</div><div class="step-title">Acude a una clínica de convenio</div></div>
+          <p>Dirígete a cualquiera de las clínicas afiliadas (ver lista abajo).</p>
+        </div>
+        <div class="step-card">
+          <div class="step-header"><div class="step-number">3</div><div class="step-title">Paga el deducible de $5</div></div>
+          <p>El único costo que debes cubrir es el deducible. El resto lo cubre el seguro.</p>
+        </div>
+        <table class="exam-table" style="margin-top: 12px;">
+          <tr><th>Concepto</th><th>Valor</th></tr>
+          <tr><td>Deducible por atención</td><td><strong>$5,00</strong></td></tr>
+          <tr><td>Cobertura máxima</td><td><strong>$2.500,00</strong></td></tr>
+        </table>
+      </div>
+
+      <div class="info-card">
+        <h3>&#128203; Opción 2: Reembolso</h3>
+        <p>Si te atiendes en una clínica que <strong>no pertenece a la red de convenio</strong>, puedes solicitar el reembolso presentando los siguientes documentos:</p>
+        <ol style="margin: 12px 0; padding-left: 24px; line-height: 2;">
+          <li>Formulario de Reclamo (proporcionado por Bienestar Universitario)</li>
+          <li>Informe médico o epicrisis del tratamiento</li>
+          <li>Recetas médicas</li>
+          <li>Facturas originales a nombre del estudiante (con cédula y dirección)</li>
+          <li>Copia a color de la cédula del estudiante</li>
+          <li>Copia del carnet estudiantil vigente</li>
+          <li>Copia de la libreta o estado de cuenta bancaria (para transferencia del reembolso)</li>
+          <li>Copia del certificado de matrícula vigente</li>
+        </ol>
+        <p style="background: #fff8e1; padding: 12px; border-radius: 8px; border-left: 4px solid var(--ups-gold);"><strong>&#9888;&#65039; Importante:</strong> Las facturas deben estar a nombre del estudiante con número de cédula y dirección.</p>
+      </div>
+
+      <div class="info-card" style="border-left: 4px solid #e53e3e;">
+        <h3>&#128663; Accidentes de Tránsito</h3>
+        <p>En caso de accidentes de tránsito, se aplica un proceso diferente:</p>
+        <div class="step-card">
+          <div class="step-header"><div class="step-number">1</div><div class="step-title">Acudir primero al SPATT</div></div>
+          <p>El <strong>Sistema Público para Pago de Accidentes de Tránsito (SPATT)</strong> cubre los primeros <strong>$3.000</strong> en atención médica por accidentes de tránsito.</p>
+        </div>
+        <div class="step-card">
+          <div class="step-header"><div class="step-number">2</div><div class="step-title">Si supera los $3.000</div></div>
+          <p>Si los gastos médicos exceden la cobertura del SPATT, el excedente puede ser cubierto por el seguro universitario hasta el límite de la póliza.</p>
+        </div>
+      </div>
+
+      <div class="info-card">
+        <h3>&#127973; Red de Clínicas con Convenio</h3>
+        <p>A continuación se listan las clínicas y hospitales afiliados a la red CONFIMED donde puedes acceder con el crédito hospitalario. Están organizadas por región y ciudad.</p>
+
+        <h4 style="margin-top: 20px; color: var(--ups-blue); border-bottom: 2px solid var(--ups-blue); padding-bottom: 4px;">&#128205; Región Sierra</h4>
+
+        <details style="margin: 10px 0;" open>
+          <summary style="cursor:pointer; font-weight:bold; padding:8px 0; color: var(--ups-blue-light);">Quito</summary>
+          <ul style="padding-left: 20px; line-height: 2;">
+            <li><strong>Hospital Metropolitano</strong> — Av. Mariana de Jesús s/n y Nicolás Arteta — Tel: (02) 399 8000</li>
+            <li><strong>Hospital de los Valles</strong> — Av. Interoceánica km 12.5 y Av. Florencia — Tel: (02) 600 0911</li>
+            <li><strong>Clínica de la Mujer</strong> — Amazonas N39-216 y Gaspar de Villarroel — Tel: (02) 245 8000</li>
+            <li><strong>Clínica Internacional</strong> — Av. España y 10 de Agosto — Tel: (02) 256 2556</li>
+            <li><strong>Clínica Pasteur</strong> — Av. España 10-55 e Imbabura — Tel: (02) 254 2669</li>
+            <li><strong>Northospital</strong> — Av. La Prensa y John F. Kennedy — Tel: (02) 399 7000</li>
+            <li><strong>Clínica Santa Lucía</strong> — Suiza y Eloy Alfaro — Tel: (02) 259 5500</li>
+            <li><strong>Hospital San Francisco de Quito (IESS)</strong></li>
+          </ul>
+        </details>
+
+        <details style="margin: 10px 0;">
+          <summary style="cursor:pointer; font-weight:bold; padding:8px 0; color: var(--ups-blue-light);">Cuenca</summary>
+          <ul style="padding-left: 20px; line-height: 2;">
+            <li><strong>Hospital Monte Sinaí</strong> — Miguel Cordero 6-111 y Av. Solano — Tel: (07) 288 5595</li>
+            <li><strong>Hospital Santa Inés</strong> — Av. Daniel Córdova Toral 2-67 — Tel: (07) 281 7888</li>
+            <li><strong>Clínica Santa Ana</strong> — Av. Manuel J. Calle 1-104 — Tel: (07) 281 4596</li>
+            <li><strong>Clínica Latinoamericana</strong> — Av. Paucarbamba y Agustín Cueva — Tel: (07) 409 5849</li>
+            <li><strong>Clínica La Paz</strong></li>
+          </ul>
+        </details>
+
+        <details style="margin: 10px 0;">
+          <summary style="cursor:pointer; font-weight:bold; padding:8px 0; color: var(--ups-blue-light);">Ambato</summary>
+          <ul style="padding-left: 20px; line-height: 2;">
+            <li><strong>Clínica Durán</strong> — Av. Rodrigo Pachano y Av. Los Guaytambos — Tel: (03) 282 2358</li>
+            <li><strong>Clínica Provida</strong></li>
+            <li><strong>Hospital Millenium</strong></li>
+          </ul>
+        </details>
+
+        <details style="margin: 10px 0;">
+          <summary style="cursor:pointer; font-weight:bold; padding:8px 0; color: var(--ups-blue-light);">Riobamba</summary>
+          <ul style="padding-left: 20px; line-height: 2;">
+            <li><strong>Clínica Metropolitan</strong></li>
+            <li><strong>Hospital San Juan</strong> — Veloz 24-34 y Larrea — Tel: (03) 296 1688</li>
+          </ul>
+        </details>
+
+        <details style="margin: 10px 0;">
+          <summary style="cursor:pointer; font-weight:bold; padding:8px 0; color: var(--ups-blue-light);">Ibarra</summary>
+          <ul style="padding-left: 20px; line-height: 2;">
+            <li><strong>Clínica Moderna</strong></li>
+            <li><strong>Clínica Mariano Acosta</strong> — Juan de Velasco 5-62 y Mejía — Tel: (06) 264 4930</li>
+          </ul>
+        </details>
+
+        <details style="margin: 10px 0;">
+          <summary style="cursor:pointer; font-weight:bold; padding:8px 0; color: var(--ups-blue-light);">Loja</summary>
+          <ul style="padding-left: 20px; line-height: 2;">
+            <li><strong>Clínica San Agustín</strong></li>
+            <li><strong>Hospital UTPL</strong> — San Cayetano Alto s/n — Tel: (07) 370 1444</li>
+          </ul>
+        </details>
+
+        <details style="margin: 10px 0;">
+          <summary style="cursor:pointer; font-weight:bold; padding:8px 0; color: var(--ups-blue-light);">Azogues</summary>
+          <ul style="padding-left: 20px; line-height: 2;">
+            <li><strong>Clínica Humanitaria</strong> — Av. Andrés F. Córdova y Luis Manuel González — Tel: (07) 224 0368</li>
+          </ul>
+        </details>
+
+        <details style="margin: 10px 0;">
+          <summary style="cursor:pointer; font-weight:bold; padding:8px 0; color: var(--ups-blue-light);">Latacunga</summary>
+          <ul style="padding-left: 20px; line-height: 2;">
+            <li><strong>Clínica Latacunga</strong> — Sánchez de Orellana y Márquez de Maenza — Tel: (03) 281 2641</li>
+            <li><strong>Hospital Provincial General de Latacunga</strong></li>
+          </ul>
+        </details>
+
+        <details style="margin: 10px 0;">
+          <summary style="cursor:pointer; font-weight:bold; padding:8px 0; color: var(--ups-blue-light);">Guaranda</summary>
+          <ul style="padding-left: 20px; line-height: 2;">
+            <li><strong>Clínica Bolívar</strong></li>
+          </ul>
+        </details>
+
+        <h4 style="margin-top: 20px; color: var(--ups-blue); border-bottom: 2px solid var(--ups-blue); padding-bottom: 4px;">&#128205; Región Costa</h4>
+
+        <details style="margin: 10px 0;" open>
+          <summary style="cursor:pointer; font-weight:bold; padding:8px 0; color: var(--ups-blue-light);">Guayaquil</summary>
+          <ul style="padding-left: 20px; line-height: 2;">
+            <li><strong>Clínica Kennedy</strong> — Av. del Periodista y Av. San Jorge — Tel: (04) 228 9666</li>
+            <li><strong>Clínica Guayaquil</strong> — Padre Aguirre 401 y Gral. Córdova — Tel: (04) 256 3555</li>
+            <li><strong>Omnihospital</strong> — Av. Abel Romeo Castillo y Av. Juan Tanca Marengo — Tel: (04) 220 7301</li>
+            <li><strong>Clínica Alcívar</strong> — Coronel 2301 y Cañar — Tel: (04) 258 0030</li>
+            <li><strong>Hospital Clínica San Francisco</strong></li>
+          </ul>
+        </details>
+
+        <details style="margin: 10px 0;">
+          <summary style="cursor:pointer; font-weight:bold; padding:8px 0; color: var(--ups-blue-light);">Portoviejo</summary>
+          <ul style="padding-left: 20px; line-height: 2;">
+            <li><strong>Clínica La Merced</strong></li>
+            <li><strong>Clínica San Gregorio</strong> — Av. Universitaria y Calle Bolívar — Tel: (05) 263 2321</li>
+          </ul>
+        </details>
+
+        <details style="margin: 10px 0;">
+          <summary style="cursor:pointer; font-weight:bold; padding:8px 0; color: var(--ups-blue-light);">Machala</summary>
+          <ul style="padding-left: 20px; line-height: 2;">
+            <li><strong>Clínica Rojas</strong></li>
+            <li><strong>Hospital Teófilo Dávila</strong></li>
+          </ul>
+        </details>
+
+        <details style="margin: 10px 0;">
+          <summary style="cursor:pointer; font-weight:bold; padding:8px 0; color: var(--ups-blue-light);">Babahoyo</summary>
+          <ul style="padding-left: 20px; line-height: 2;">
+            <li><strong>Clínica San Agustín</strong></li>
+          </ul>
+        </details>
+
+        <details style="margin: 10px 0;">
+          <summary style="cursor:pointer; font-weight:bold; padding:8px 0; color: var(--ups-blue-light);">Santo Domingo de los Tsáchilas</summary>
+          <ul style="padding-left: 20px; line-height: 2;">
+            <li><strong>Clínica Santiago</strong> — Av. Quito y Latacunga — Tel: (02) 275 0456</li>
+            <li><strong>Clínica Torres Médicas</strong> — Av. Abraham Calazacón — Tel: (02) 275 4800</li>
+          </ul>
+        </details>
+
+        <details style="margin: 10px 0;">
+          <summary style="cursor:pointer; font-weight:bold; padding:8px 0; color: var(--ups-blue-light);">Salinas</summary>
+          <ul style="padding-left: 20px; line-height: 2;">
+            <li><strong>Clínica del Sol</strong></li>
+          </ul>
+        </details>
+
+        <details style="margin: 10px 0;">
+          <summary style="cursor:pointer; font-weight:bold; padding:8px 0; color: var(--ups-blue-light);">Chone</summary>
+          <ul style="padding-left: 20px; line-height: 2;">
+            <li><strong>Clínica San Andrés</strong></li>
+          </ul>
+        </details>
+
+        <details style="margin: 10px 0;">
+          <summary style="cursor:pointer; font-weight:bold; padding:8px 0; color: var(--ups-blue-light);">El Carmen</summary>
+          <ul style="padding-left: 20px; line-height: 2;">
+            <li><strong>Clínica Jesús de Nazareth</strong></li>
+          </ul>
+        </details>
+
+        <h4 style="margin-top: 20px; color: var(--ups-blue); border-bottom: 2px solid var(--ups-blue); padding-bottom: 4px;">&#128205; Región Oriente</h4>
+
+        <details style="margin: 10px 0;" open>
+          <summary style="cursor:pointer; font-weight:bold; padding:8px 0; color: var(--ups-blue-light);">Macas</summary>
+          <ul style="padding-left: 20px; line-height: 2;">
+            <li><strong>Hospital Básico de Macas</strong> — Tel: (07) 270 0643</li>
+          </ul>
+        </details>
+
+        <details style="margin: 10px 0;">
+          <summary style="cursor:pointer; font-weight:bold; padding:8px 0; color: var(--ups-blue-light);">El Coca (Francisco de Orellana)</summary>
+          <ul style="padding-left: 20px; line-height: 2;">
+            <li><strong>Clínica Orellana</strong> — Tel: (06) 288 1464</li>
+          </ul>
+        </details>
+
+        <details style="margin: 10px 0;">
+          <summary style="cursor:pointer; font-weight:bold; padding:8px 0; color: var(--ups-blue-light);">El Puyo (Pastaza)</summary>
+          <ul style="padding-left: 20px; line-height: 2;">
+            <li><strong>Hospital Provincial Puyo</strong></li>
+          </ul>
+        </details>
+
+        <details style="margin: 10px 0;">
+          <summary style="cursor:pointer; font-weight:bold; padding:8px 0; color: var(--ups-blue-light);">Yantzaza</summary>
+          <ul style="padding-left: 20px; line-height: 2;">
+            <li><strong>Centro Médico Yantzaza</strong></li>
+          </ul>
+        </details>
+
+        <details style="margin: 10px 0;">
+          <summary style="cursor:pointer; font-weight:bold; padding:8px 0; color: var(--ups-blue-light);">La Joya de los Sachas</summary>
+          <ul style="padding-left: 20px; line-height: 2;">
+            <li><strong>Hospital Básico Joya de los Sachas</strong> — Tel: (06) 289 9297</li>
+          </ul>
+        </details>
+
+        <details style="margin: 10px 0;">
+          <summary style="cursor:pointer; font-weight:bold; padding:8px 0; color: var(--ups-blue-light);">Lago Agrio (Nueva Loja)</summary>
+          <ul style="padding-left: 20px; line-height: 2;">
+            <li><strong>Clínica González</strong> — Tel: (06) 283 0940</li>
+          </ul>
+        </details>
+
+        <details style="margin: 10px 0;">
+          <summary style="cursor:pointer; font-weight:bold; padding:8px 0; color: var(--ups-blue-light);">Dayana (Zamora Chinchipe)</summary>
+          <ul style="padding-left: 20px; line-height: 2;">
+            <li><strong>Especialidades Médicas</strong></li>
+          </ul>
+        </details>
+
+        <p style="margin-top: 16px; background: #edf2f7; padding: 12px; border-radius: 8px; font-size: 14px;">
+          <strong>&#128161; Nota:</strong> La lista de clínicas puede actualizarse periódicamente. Para confirmar la vigencia del convenio, llama al <strong>1700 30 30 30</strong>.
+        </p>
+      </div>
+
+      <div class="info-card" style="background: linear-gradient(135deg, #f0f4ff 0%, #e8ecf4 100%);">
+        <h3>&#128100; ¿Dónde tramitar el seguro en la UPS?</h3>
+        <p>Acude a la oficina de <strong>Bienestar Universitario</strong> de tu sede para obtener el formulario de reclamo, orientación sobre el proceso y cualquier duda adicional sobre tu seguro estudiantil.</p>
+      </div>
     </div>
 
   </div>
@@ -1353,7 +1647,8 @@ function showSection(id) {
     carnet: 'Carnet Digital', canales: 'Canales de Comunicaci\u00f3n',
     certificados: 'Certificados Electr\u00f3nicos', pagos: 'Canales de Pago', becas: 'Becas',
     retiro: 'Retiro Acad\u00e9mico', 'pago-boton': 'Bot\u00f3n de Pagos', 'pago-pichincha': 'Pago Banco Pichincha', 'pago-pichincha-app': 'Pago App Pichincha', 'pago-pacifico': 'Pago Banco del Pac\u00edfico',
-    idiomas: 'Ex\u00e1menes de Ingl\u00e9s', 'idiomas-cest': 'Informaci\u00f3n CEST Cambridge'
+    idiomas: 'Ex\u00e1menes de Ingl\u00e9s', 'idiomas-cest': 'Informaci\u00f3n CEST Cambridge',
+    seguro: 'Seguro contra Accidentes'
   };
   document.getElementById('breadcrumb').textContent = titles[id] || id;
   // Update URL
