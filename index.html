@@ -184,6 +184,16 @@
   }
   .no-results.show { display: block; }
   #homeSearch:focus { box-shadow: 0 4px 20px rgba(0,0,0,.2), 0 0 0 3px rgba(218,170,0,.4); }
+  .hero-logo { width: 200px; height: auto; opacity: .9; position: relative; z-index: 1; flex-shrink: 0; }
+  @media (max-width: 768px) { .hero-logo { display: none; } }
+
+  /* FOOTER */
+  .site-footer {
+    text-align: center; padding: 24px 20px; margin-top: 40px;
+    border-top: 1px solid #e0e0e0; color: #999; font-size: 13px;
+  }
+  .site-footer a { color: var(--ups-blue); text-decoration: none; }
+  .site-footer a:hover { text-decoration: underline; }
   /* RESPONSIVE */
   @media (min-width: 1400px) {
     .content { padding: 36px 56px; }
@@ -378,14 +388,16 @@
 
     <!-- HOME -->
     <div class="section active" id="sec-home">
-      <div class="hero">
-        <img src="logo-ups-white.svg" alt="UPS" style="height:44px; margin-bottom:16px; position:relative; z-index:1; opacity:.95;">
-        <h1>Guía del Estudiante</h1>
-        <p style="max-width:560px;">Modalidad En Línea — Tutoriales paso a paso para gestionar tus trámites académicos, consultas y servicios universitarios.</p>
-        <div class="hero-search" style="position:relative; z-index:1; margin-top:20px; max-width:480px;">
-          <input type="text" id="homeSearch" placeholder="Buscar tutorial... (ej: calificaciones, deudas, inglés)" oninput="filterHome(this.value)" style="width:100%; padding:14px 20px 14px 44px; border:none; border-radius:50px; font-size:14px; box-shadow:0 4px 20px rgba(0,0,0,.2); outline:none; font-family:inherit;">
-          <span style="position:absolute; left:16px; top:50%; transform:translateY(-50%); font-size:18px; opacity:.4;">&#128269;</span>
+      <div class="hero" style="display:flex; align-items:center; justify-content:space-between; gap:32px;">
+        <div style="position:relative; z-index:1; flex:1;">
+          <h1>Guía del Estudiante</h1>
+          <p style="max-width:520px;">Modalidad En Línea — Tutoriales paso a paso para gestionar tus trámites académicos, consultas y servicios universitarios.</p>
+          <div class="hero-search" style="position:relative; margin-top:20px; max-width:480px;">
+            <input type="text" id="homeSearch" placeholder="Buscar tutorial... (ej: calificaciones, deudas, inglés)" oninput="filterHome(this.value)" style="width:100%; padding:14px 20px 14px 44px; border:none; border-radius:50px; font-size:14px; box-shadow:0 4px 20px rgba(0,0,0,.2); outline:none; font-family:inherit;">
+            <span style="position:absolute; left:16px; top:50%; transform:translateY(-50%); font-size:18px; opacity:.4;">&#128269;</span>
+          </div>
         </div>
+        <img src="logo-ups-white.svg" alt="UPS" class="hero-logo">
       </div>
 
       <!-- CATEGORÍAS -->
@@ -1288,6 +1300,9 @@
     </div>
 
   </div>
+  <footer class="site-footer">
+      <p>Desarrollado por Carlos Vásconez © 2026 — Universidad Politécnica Salesiana</p>
+    </footer>
 </div>
 
 <!-- LIGHTBOX -->
