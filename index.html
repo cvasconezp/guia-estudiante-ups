@@ -33,11 +33,26 @@
   .sidebar-header h3 { font-size: 12px; font-weight: 400; opacity: .8; }
   .sidebar-logo { font-size: 22px; font-weight: 700; margin-bottom: 6px; letter-spacing: 1px; }
 
-  .nav-section { padding: 12px 0; }
+  .nav-section { padding: 4px 0; border-bottom: 1px solid rgba(255,255,255,.08); }
   .nav-section-title {
     font-size: 10px; text-transform: uppercase; letter-spacing: 1.5px;
-    color: var(--ups-gold); padding: 8px 20px; font-weight: 700;
+    color: var(--ups-gold); padding: 10px 20px; font-weight: 700;
+    cursor: pointer; display: flex; align-items: center; justify-content: space-between;
+    user-select: none; transition: color 0.2s;
   }
+  .nav-section-title:hover { color: #fff; }
+  .nav-section-title::after {
+    content: '\25BC'; font-size: 8px; transition: transform 0.3s ease;
+    opacity: 0.6;
+  }
+  .nav-section.collapsed .nav-section-title::after { transform: rotate(-90deg); }
+  .nav-section-items {
+    max-height: 600px; overflow: hidden;
+    transition: max-height 0.3s ease;
+  }
+  .nav-section.collapsed .nav-section-items { max-height: 0; }
+  .nav-section.no-toggle .nav-section-title { cursor: default; }
+  .nav-section.no-toggle .nav-section-title::after { display: none; }
   .nav-item {
     display: flex; align-items: center; gap: 10px;
     padding: 10px 20px; cursor: pointer; transition: all .2s;
@@ -310,7 +325,7 @@
       </a>
     </div>
   </div>
-  <div class="nav-section">
+  <div class="nav-section no-toggle">
     <div class="nav-section-title">Enlaces de Interés</div>
     <a class="nav-item" href="https://www.ups.edu.ec/" target="_blank" rel="noopener">
       <span class="nav-icon">&#127891;</span> Portal UPS
